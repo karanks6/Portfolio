@@ -1,64 +1,57 @@
 import React from 'react';
 import { SKILLS } from '../data/content';
-import { Code, Wrench, Database } from 'lucide-react';
 
 export const Skills: React.FC = () => {
   return (
-    <section id="skills" className="section-container skills-section">
-      <div className="section-inner skills-inner">
-        <div className="section-label-pill">CAPABILITIES</div>
-        
-        <h2 className="section-heading">
-          Technical Skills &amp; Stack
-        </h2>
-        <p className="skills-subtitle">
-          Core proficiencies spanning system programming, full-stack frameworks, machine learning tools, and database systems.
-        </p>
+    <section id="skills" className="resume" style={{ paddingTop: '12vh', paddingBottom: '16vh' }}>
+      <h2 className="resume-title">Skills &amp; Tech</h2>
 
-        <div className="skills-groups">
-          {/* Languages */}
-          <div className="skills-group-row">
-            <div className="skills-group-header">
-              <Code size={16} className="skills-group-icon" />
-              <span className="skills-group-title">Languages</span>
-            </div>
-            <div className="skills-tags-line">
-              {SKILLS.languages.map((lang, idx) => (
-                <span key={idx} className="skill-pill">
-                  {lang}
-                </span>
-              ))}
-            </div>
+      <div className="timeline" style={{ marginTop: '5vh' }}>
+        {/* Languages */}
+        <div className="tl-entry" style={{ paddingBottom: '8vh' }}>
+          <div className="tl-dot" />
+          <div className="tl-period">CORE PROFICIENCIES</div>
+          <div className="tl-head">
+            <h3 className="tl-place">Programming Languages</h3>
           </div>
-
-          {/* Frameworks & Tools */}
-          <div className="skills-group-row">
-            <div className="skills-group-header">
-              <Wrench size={16} className="skills-group-icon" />
-              <span className="skills-group-title">Frameworks &amp; Tools</span>
-            </div>
-            <div className="skills-tags-line">
-              {SKILLS.frameworks.map((fw, idx) => (
-                <span key={idx} className="skill-pill skill-pill-framework">
-                  {fw}
-                </span>
-              ))}
-            </div>
+          <div className="tl-role" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '12px' }}>
+            {SKILLS.languages.map((lang, idx) => (
+              <span key={idx} className="wk-badge">
+                {lang}
+              </span>
+            ))}
           </div>
+        </div>
 
-          {/* Databases */}
-          <div className="skills-group-row">
-            <div className="skills-group-header">
-              <Database size={16} className="skills-group-icon" />
-              <span className="skills-group-title">Databases</span>
-            </div>
-            <div className="skills-tags-line">
-              {SKILLS.databases.map((db, idx) => (
-                <span key={idx} className="skill-pill skill-pill-database">
-                  {db}
-                </span>
-              ))}
-            </div>
+        {/* Frameworks & Tools */}
+        <div className="tl-entry" style={{ paddingBottom: '8vh' }}>
+          <div className="tl-dot" />
+          <div className="tl-period">SYSTEMS &amp; LIBS</div>
+          <div className="tl-head">
+            <h3 className="tl-place">Frameworks &amp; Tools</h3>
+          </div>
+          <div className="tl-role" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '12px' }}>
+            {SKILLS.frameworks.map((fw, idx) => (
+              <span key={idx} className="wk-badge">
+                {fw}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Databases */}
+        <div className="tl-entry" style={{ paddingBottom: '4vh' }}>
+          <div className="tl-dot" />
+          <div className="tl-period">STORAGE &amp; CLOUD</div>
+          <div className="tl-head">
+            <h3 className="tl-place">Databases &amp; Services</h3>
+          </div>
+          <div className="tl-role" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '12px' }}>
+            {SKILLS.databases.map((db, idx) => (
+              <span key={idx} className="wk-badge">
+                {db}
+              </span>
+            ))}
           </div>
         </div>
       </div>

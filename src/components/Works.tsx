@@ -1,172 +1,301 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { PROJECTS, Project } from '../data/content';
-import { ExternalLink, Layers, Sparkles } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 interface WorksProps {
   onSelectTool?: (toolId: string) => void;
 }
 
-const TOOL_META = {
-  flutter: {
-    name: 'Flutter',
-    badge: 'Mobile & Multiplatform',
-    color: '#02569B',
-    accentBorder: 'rgba(2, 86, 155, 0.35)',
-    description: 'Cross-platform mobile interfaces, computer vision integration, and native performance.'
-  },
-  python: {
-    name: 'Python',
-    badge: 'AI & Data Science',
-    color: '#3776AB',
-    accentBorder: 'rgba(55, 118, 171, 0.35)',
-    description: 'Machine learning pipelines, facial analysis, color science, and intelligent backend services.'
-  },
-  react: {
-    name: 'React.js',
-    badge: '3D Web & Interactive',
-    color: '#61DAFB',
-    accentBorder: 'rgba(97, 218, 251, 0.35)',
-    description: 'Rich client experiences, Three.js 3D web applications, and modular interfaces.'
-  },
-  nodejs: {
-    name: 'Node.js',
-    badge: 'Full Stack & APIs',
-    color: '#339933',
-    accentBorder: 'rgba(51, 153, 51, 0.35)',
-    description: 'RESTful architectures, real-time messaging, database integrations, and cloud deployments.'
-  }
-};
+interface EnrichedProject extends Project {
+  cardNo: string;
+  category: string;
+  metric?: string;
+  tag: string;
+}
 
-export const Works: React.FC<WorksProps> = ({ onSelectTool }) => {
-  const tools: Array<'flutter' | 'python' | 'react' | 'nodejs'> = [
-    'flutter',
-    'python',
-    'react',
-    'nodejs'
-  ];
+const CARDS_DATA = [
+  {
+    no: '01',
+    title: 'Flutter & Mobile',
+    tagline: 'Cross-platform mobile apps, computer vision integration & native performance.',
+    projects: [
+      {
+        ...PROJECTS.flutter[0],
+        cardNo: '01',
+        category: 'Flutter & Mobile AI',
+        metric: '89.95% Acc',
+        tag: 'Computer Vision & AR'
+      },
+      {
+        ...PROJECTS.flutter[1],
+        cardNo: '01',
+        category: 'Flutter Multiplatform',
+        metric: 'Dart & Flutter',
+        tag: 'Mobile Application'
+      }
+    ]
+  },
+  {
+    no: '02',
+    title: 'AI & Vision',
+    tagline: 'Monk skin tone analysis, facial masking, GMM & colour science.',
+    projects: [
+      {
+        ...PROJECTS.python[0],
+        cardNo: '02',
+        category: 'Applied AI & Python',
+        metric: 'Monk Scale 1-10',
+        tag: 'MediaPipe & GMM'
+      }
+    ]
+  },
+  {
+    no: '03',
+    title: '3D & Web',
+    tagline: 'WebGL 3D experiences, Three.js shaders & interactive client interfaces.',
+    projects: [
+      {
+        ...PROJECTS.react[0],
+        cardNo: '03',
+        category: 'Interactive 3D Web',
+        metric: 'WebGL Model Viewer',
+        tag: 'Three.js & React'
+      },
+      {
+        ...PROJECTS.react[1],
+        cardNo: '03',
+        category: 'EdTech Web Platform',
+        metric: 'Frontend Web',
+        tag: 'React.js'
+      }
+    ]
+  },
+  {
+    no: '04',
+    title: 'Full Stack & APIs',
+    tagline: 'MERN stack carpooling platform, database schemas & cloud architecture.',
+    projects: [
+      {
+        ...PROJECTS.nodejs[0],
+        cardNo: '04',
+        category: 'Full Stack MERN',
+        metric: 'Smart Matching',
+        tag: 'Node.js & MongoDB'
+      }
+    ]
+  }
+];
+
+export const Works: React.FC<WorksProps> = () => {
+  const [selectedProject, setSelectedProject] = useState<EnrichedProject | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const [trackProgress, setTrackProgress] = useState(0);
+
+  // Measure track width to compute total horizontal scroll distance
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (!trackRef.current) return;
+      const trackWidth = trackRef.current.scrollWidth;
+      const winWidth = window.innerWidth;
+      const distance = Math.max(0, trackWidth - winWidth);
+      setScrollDistance(distance);
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Update horizontal translation and progress bar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!galleryRef.current || !trackRef.current) return;
+      const rect = galleryRef.current.getBoundingClientRect();
+      const winHeight = window.innerHeight;
+
+      // When the top of gallery hits 0, it scrolls until rect.bottom reaches winHeight
+      const totalScrollable = Math.max(1, galleryRef.current.offsetHeight - winHeight);
+      const scrolled = Math.max(0, -rect.top);
+      const rawProgress = Math.min(1, Math.max(0, scrolled / totalScrollable));
+
+      setTrackProgress(rawProgress);
+
+      if (window.innerWidth > 640) {
+        const xOffset = rawProgress * scrollDistance;
+        trackRef.current.style.transform = `translateX(-${xOffset}px)`;
+      } else {
+        trackRef.current.style.transform = 'none';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrollDistance]);
+
+  // Modal ESC handler & body lock
+  useEffect(() => {
+    if (!selectedProject) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selectedProject]);
 
   return (
-    <div id="works" className="works-container">
-      {/* Works Intro Section */}
-      <section id="works-intro" className="section-container works-intro-section">
-        <div className="section-inner">
-          <div className="section-label-pill">FEATURED WORK</div>
-          <h2 className="section-heading">
-            Organised by Tool &amp; Technology
-          </h2>
-          <p className="works-intro-text">
-            Each project is grouped directly under the tool sticker baked onto the avatar's cheek.
-            Explore the subsections below or tap a tool sticker on the model to glide straight to its projects.
-          </p>
+    <section id="works" className="works">
+      <div
+        className="wk-gallery"
+        ref={galleryRef}
+        style={{
+          height:
+            typeof window !== 'undefined' && window.innerWidth > 640
+              ? `calc(100vh + ${scrollDistance}px)`
+              : 'auto'
+        }}
+      >
+        <div className="wk-gallery-sticky">
+          <span className="wk-gallery-title">Works</span>
 
-          <div className="tool-quick-nav">
-            {tools.map((tool) => (
-              <button
-                key={tool}
-                onClick={() => onSelectTool && onSelectTool(`works-${tool}`)}
-                className="tool-nav-pill"
-                style={{ borderColor: TOOL_META[tool].accentBorder }}
-                aria-label={`Jump to ${TOOL_META[tool].name} projects`}
-              >
-                <span
-                  className="tool-pill-dot"
-                  style={{ backgroundColor: TOOL_META[tool].color }}
-                />
-                <span>{TOOL_META[tool].name}</span>
-                <span className="tool-pill-count">{PROJECTS[tool].length}</span>
-              </button>
+          <div className="wk-track" ref={trackRef}>
+            {CARDS_DATA.map((card) => (
+              <div key={card.no} className="wk-card">
+                <div className="wk-card-head">
+                  <span className="wk-card-no">{card.no}</span>
+                  <h3 className="wk-card-title">{card.title}</h3>
+                  <span className="wk-card-tagline">{card.tagline}</span>
+                </div>
+
+                <div className="wk-card-body">
+                  <ul className="wk-list">
+                    {card.projects.map((proj, pIdx) => (
+                      <li key={pIdx} className="wk-line">
+                        <button
+                          type="button"
+                          className="wk-line-btn"
+                          onClick={() => setSelectedProject(proj)}
+                          aria-label={`View details for ${proj.title}`}
+                        >
+                          <span className="wk-line-name">{proj.title}</span>
+                          <div className="wk-line-meta">
+                            {proj.metric && (
+                              <span className="wk-line-num">{proj.metric}</span>
+                            )}
+                            <span className="wk-line-tag">{proj.tag}</span>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
           </div>
+
+          {/* Bottom Progress Bar */}
+          <div className="wk-progress" aria-hidden="true">
+            <div
+              className="wk-progress-fill"
+              style={{
+                transform: `scaleX(${trackProgress})`
+              }}
+            />
+          </div>
+
+          {/* Keep Scrolling hint */}
+          <span className="wk-hint" aria-hidden="true">
+            KEEP SCROLLING
+          </span>
         </div>
-      </section>
+      </div>
 
-      {/* Tool Subsections in exact required order: Flutter, Python, React.js, Node.js */}
-      {tools.map((tool) => {
-        const meta = TOOL_META[tool];
-        const projectList = PROJECTS[tool];
-
-        return (
-          <section
-            key={tool}
-            id={`works-${tool}`}
-            className={`section-container tool-section tool-section-${tool}`}
+      {/* Project Details Modal */}
+      {selectedProject && (
+        <>
+          <div
+            className="wk-detail-backdrop"
+            onClick={() => setSelectedProject(null)}
+          />
+          <div
+            className="wk-detail"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="wk-modal-title"
           >
-            <div className="section-inner tool-section-inner">
-              <div className="tool-header">
-                <div
-                  className="tool-badge-pill"
-                  style={{
-                    borderColor: meta.accentBorder,
-                    color: meta.color
-                  }}
-                >
-                  <Layers size={13} />
-                  <span>{meta.badge}</span>
-                </div>
-                <h3 className="tool-section-title">
-                  {meta.name} <span className="title-muted">Projects</span>
-                </h3>
-                <p className="tool-section-desc">{meta.description}</p>
-              </div>
+            <button
+              type="button"
+              className="wk-detail-close"
+              onClick={() => setSelectedProject(null)}
+              aria-label="Close project modal"
+            >
+              <X size={18} />
+            </button>
 
-              <div className="projects-grid">
-                {projectList.map((proj: Project, pIdx: number) => (
-                  <article key={pIdx} className="project-card">
-                    <div className="project-header">
-                      <div className="project-title-row">
-                        <Sparkles size={16} className="project-sparkle" />
-                        <h4 className="project-title">{proj.title}</h4>
-                      </div>
-                      <span className="project-tool-tag">{meta.name}</span>
-                    </div>
-
-                    {proj.description && (
-                      <p className="project-description">{proj.description}</p>
-                    )}
-
-                    {proj.stack && proj.stack.length > 0 && (
-                      <div className="project-stack">
-                        {proj.stack.map((item, sIdx) => (
-                          <span key={sIdx} className="stack-tag">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="project-actions">
-                      <a
-                        href={proj.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-project btn-github"
-                        aria-label={`GitHub repository for ${proj.title}`}
-                      >
-                        <GithubIcon size={15} />
-                        <span>GitHub</span>
-                      </a>
-
-                      {proj.liveDemoUrl && (
-                        <a
-                          href={proj.liveDemoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-project btn-live"
-                          aria-label={`Live Demo for ${proj.title}`}
-                        >
-                          <ExternalLink size={15} />
-                          <span>Live Demo</span>
-                        </a>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
+            <div className="wk-detail-banner is-ph">
+              <span className="wk-detail-ph-text">{selectedProject.title}</span>
             </div>
-          </section>
-        );
-      })}
-    </div>
+
+            <article className="wk-detail-article">
+              <header className="wk-detail-head">
+                <h3 id="wk-modal-title" className="wk-detail-title">
+                  {selectedProject.title}
+                </h3>
+                <div className="wk-detail-sub">{selectedProject.category}</div>
+
+                {selectedProject.stack && selectedProject.stack.length > 0 && (
+                  <div className="wk-detail-tags">
+                    {selectedProject.stack.map((item, sIdx) => (
+                      <span key={sIdx} className="wk-badge">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </header>
+
+              <div className="wk-detail-desc">
+                {selectedProject.description ||
+                  'Specialized engineering project focused on high performance, clean architecture, and intuitive user experiences.'}
+              </div>
+
+              <div className="wk-detail-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '24px' }}>
+                <a
+                  href={selectedProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wk-detail-link"
+                >
+                  <GithubIcon size={16} />
+                  <span>View Repository</span>
+                </a>
+
+                {selectedProject.liveDemoUrl && (
+                  <a
+                    href={selectedProject.liveDemoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wk-detail-link"
+                    style={{ borderColor: 'rgba(244, 241, 234, 0.4)', color: 'var(--ink)' }}
+                  >
+                    <ExternalLink size={16} />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          </div>
+        </>
+      )}
+    </section>
   );
 };

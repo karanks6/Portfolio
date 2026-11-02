@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useProgress } from '@react-three/drei';
-import { Header } from './components/Header';
+import { ChromeFrame } from './components/ChromeFrame';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
 import { Timeline } from './components/Timeline';
 import { Works } from './components/Works';
 import { Skills } from './components/Skills';
@@ -10,6 +9,7 @@ import { Contact } from './components/Contact';
 import { Loader } from './components/Loader';
 import { StickerOverlay } from './components/StickerOverlay';
 import { Scene } from './three/Scene';
+import { NoiseOverlay } from './three/NoiseOverlay';
 import { STICKERS, StickerDefinition } from './data/stickers';
 import { HotspotScreenData } from './three/StickerHotspots';
 
@@ -28,6 +28,7 @@ function LoadingManagerComponent({ onLoaded }: { onLoaded: () => void }) {
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('hero');
   const [hotspots, setHotspots] = useState<HotspotScreenData[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
@@ -53,7 +54,7 @@ export default function App() {
     }
   }, []);
 
-  // Scrubbed Scroll Progress calculation: progress = scrollY / (docHeight - winHeight)
+  // Track scroll progress & active section
   useEffect(() => {
     const handleScroll = () => {
       const docHeight = document.documentElement.scrollHeight;
@@ -62,6 +63,19 @@ export default function App() {
       const currentScroll = window.scrollY || window.pageYOffset;
       const progress = Math.max(0, Math.min(1, currentScroll / maxScroll));
       setScrollProgress(progress);
+
+      // Determine active section for vertical indicator dots
+      const sections = ['hero', 'resume', 'works', 'skills', 'contact'];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= winHeight * 0.45) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -73,7 +87,7 @@ export default function App() {
   const scrollToElement = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, []);
 
@@ -92,8 +106,16 @@ export default function App() {
 
   return (
     <div className="portfolio-app">
+      {/* Viewport cyan edge atmospheric vignette */}
+      <div className="viewport-vignette" />
+
       {/* Background grain texture */}
       <div className="grain-overlay" />
+
+      {/* Atmospheric scrim & glass rail */}
+      <div className="scrim" />
+      <div className="glass-rail" />
+      <div className="hero-gradient" />
 
       {/* Loading Screen */}
       {!isLoaded && <LoadingManagerComponent onLoaded={() => setIsLoaded(true)} />}
@@ -110,6 +132,9 @@ export default function App() {
         </Suspense>
       )}
 
+      {/* Procedural animated hatching noise shader overlay */}
+      {webGlAvailable && <NoiseOverlay />}
+
       {/* 2D Projected Hotspot Buttons */}
       {webGlAvailable && isLoaded && (
         <StickerOverlay
@@ -119,13 +144,16 @@ export default function App() {
         />
       )}
 
-      {/* Fixed Header */}
-      <Header onScrollToTop={() => scrollToElement('hero')} />
+      {/* Fixed Chrome Frame & Viewport Metadata + Navigation */}
+      <ChromeFrame
+        activeSection={activeSection}
+        scrollProgress={scrollProgress}
+        onNavigate={scrollToElement}
+      />
 
-      {/* Scrollable HTML Content */}
+      {/* Scrollable Content */}
       <main className="content-scroller">
-        <Hero onScrollCue={() => scrollToElement('about')} />
-        <About />
+        <Hero onScrollCue={() => scrollToElement('resume')} />
         <Timeline />
         <Works onSelectTool={(toolId) => scrollToElement(toolId)} />
         <Skills />
