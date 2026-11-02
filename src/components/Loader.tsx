@@ -5,31 +5,30 @@ interface LoaderProps {
 }
 
 export const Loader: React.FC<LoaderProps> = ({ progress }) => {
-  const roundedProgress = Math.min(100, Math.max(0, Math.round(progress)));
+  const radius = 32;
+  const circumference = 2 * Math.PI * radius;
+  const clampedProgress = Math.min(100, Math.max(5, progress));
+  const strokeDashoffset = circumference - (clampedProgress / 100) * circumference;
 
   return (
-    <div className="loader-overlay">
-      <div className="loader-card">
-        <div className="loader-brand">
-          <span className="loader-dot" />
-          <span className="loader-title">Karan S Suvarna</span>
-        </div>
-
-        <p className="loader-status">
-          Loading 3D Experience...
-        </p>
-
-        <div className="loader-progress-track">
-          <div
-            className="loader-progress-bar"
-            style={{ width: `${roundedProgress}%` }}
+    <div className="loading-screen" role="progressbar" aria-valuenow={Math.round(progress)}>
+      <div className="loading-ring">
+        <svg viewBox="0 0 80 80">
+          <circle
+            className="lr-track"
+            cx="40"
+            cy="40"
+            r={radius}
           />
-        </div>
-
-        <div className="loader-info">
-          <span className="loader-label">Preparing 3D Avatar</span>
-          <span className="loader-percent">{roundedProgress}%</span>
-        </div>
+          <circle
+            className="lr-arc"
+            cx="40"
+            cy="40"
+            r={radius}
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+          />
+        </svg>
       </div>
     </div>
   );
