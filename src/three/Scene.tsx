@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Center } from '@react-three/drei';
 import * as THREE from 'three';
+import { BackgroundSphere } from './BackgroundSphere';
 import { sampleCameraTimeline } from './CameraRig';
 import { Avatar } from './Avatar';
 import { HotspotScreenData } from './StickerHotspots';
@@ -81,22 +81,25 @@ export function Scene({
       }}
     >
       <Canvas
-        camera={{ position: [0, 0.04, 1.18], fov: 44, near: 0.1, far: 20 }}
+        camera={{ position: [0, 0.04, 1.18], fov: 44, near: 0.1, far: 200 }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{
           antialias: true,
           alpha: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.05
+          toneMappingExposure: 1.15
         }}
       >
-        {/* Balanced studio lighting tailored for dark background */}
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[2, 3, 3]} intensity={1.5} />
-        <directionalLight position={[-2, 1.5, 2]} intensity={1.2} />
-        <directionalLight position={[0, -2, 2]} intensity={0.5} />
-        <directionalLight position={[0, 3, -2]} intensity={0.8} />
+        {/* Background gradient dome */}
+        <BackgroundSphere />
+
+        {/* Studio lighting matching reference website */}
+        <ambientLight intensity={0.65} color="#ffffff" />
+        <hemisphereLight args={['#ffffff', '#404040', 1.15]} />
+        <directionalLight position={[5, 8, 5]} intensity={2.35} color="#ffd9c6" />
+        <directionalLight position={[-5, 4, -4]} intensity={2.25} color="#9fc6ff" />
+        <directionalLight position={[0, -2, 2]} intensity={0.4} color="#dbd3b5" />
 
         <CameraRigController
           progress={progress}
@@ -104,17 +107,15 @@ export function Scene({
           onModelParams={handleModelParams}
         />
 
-        <Center>
-          <Avatar
-            modelRotY={modelParams.current.rotY}
-            modelOffsetX={modelParams.current.ox}
-            modelOffsetY={modelParams.current.oy}
-            progress={progress}
-            isReducedMotion={isReducedMotion}
-            onHotspotsUpdate={onHotspotsUpdate}
-            onStickerClick={onStickerClick}
-          />
-        </Center>
+        <Avatar
+          modelRotY={modelParams.current.rotY}
+          modelOffsetX={modelParams.current.ox}
+          modelOffsetY={modelParams.current.oy}
+          progress={progress}
+          isReducedMotion={isReducedMotion}
+          onHotspotsUpdate={onHotspotsUpdate}
+          onStickerClick={onStickerClick}
+        />
       </Canvas>
     </div>
   );

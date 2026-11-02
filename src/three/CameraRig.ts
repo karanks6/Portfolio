@@ -13,130 +13,113 @@ export interface CameraKeyframe {
 }
 
 export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
-  // 1. HERO (Progress 0.00): Front-facing poster pose, full bust visible, sharp avatar
+  // 1. HERO (Progress 0.00): Front-facing poster pose, centered bust, sharp avatar
   {
     progress: 0.00,
-    camPos: [0.0, 0.04, 1.28],
+    camPos: [0.0, 0.04, 1.25],
     target: [0.0, 0.01, 0.0],
     fov: 44,
     modelRotY: 0.0,
     modelOffsetX: 0.0,
-    modelOffsetY: -0.08,
-    focusDistance: 1.28,
+    modelOffsetY: -0.06,
+    focusDistance: 1.25,
     dofBokehScale: 1.0
   },
-  // 2. ABOUT (Progress 0.12): Gentle dolly-in, avatar slightly softened
+  // 2. HERO TRANSITION (Progress 0.10): Glides smoothly toward the left
   {
-    progress: 0.12,
-    camPos: [0.0, 0.05, 1.05],
-    target: [0.0, 0.03, 0.0],
-    fov: 42,
-    modelRotY: 0.04,
-    modelOffsetX: 0.0,
-    modelOffsetY: -0.06,
-    focusDistance: 1.05,
-    dofBokehScale: 2.2
+    progress: 0.10,
+    camPos: [-0.10, 0.05, 1.15],
+    target: [0.0, 0.02, 0.0],
+    fov: 43,
+    modelRotY: 0.18,
+    modelOffsetX: -0.25,
+    modelOffsetY: -0.04,
+    focusDistance: 1.15,
+    dofBokehScale: 1.5
   },
-  // 3. TIMELINE (Progress 0.24): Pulls back slightly, shifts right so vertical timeline has clear space on left
+  // 3. RÉSUMÉ / TIMELINE (Progress 0.22): Left-docked, 3/4 turn facing right toward timeline
   {
-    progress: 0.24,
-    camPos: [0.12, 0.04, 1.25],
+    progress: 0.22,
+    camPos: [-0.16, 0.06, 1.02],
     target: [0.0, 0.03, 0.0],
-    fov: 44,
-    modelRotY: -0.20,
-    modelOffsetX: 0.24,
+    fov: 40,
+    modelRotY: 0.32,
+    modelOffsetX: -0.44,
     modelOffsetY: -0.03,
-    focusDistance: 1.25,
+    focusDistance: 1.02,
     dofBokehScale: 1.8
   },
-  // 4. WORKS INTRO (Progress 0.36): Begins orbiting toward TOOL CHEEK (Model's Right Cheek, X < 0)
+  // 4. RÉSUMÉ CONTINUED (Progress 0.34): Deep focus on face stickers, cleanly framed on left
   {
-    progress: 0.36,
-    camPos: [-0.32, 0.08, 0.86],
-    target: [-0.10, 0.05, 0.12],
+    progress: 0.34,
+    camPos: [-0.20, 0.07, 0.92],
+    target: [-0.04, 0.04, 0.05],
     fov: 38,
-    modelRotY: 0.32,
-    modelOffsetX: 0.22,
-    modelOffsetY: 0.0,
-    focusDistance: 0.86,
-    dofBokehScale: 1.2
+    modelRotY: 0.44,
+    modelOffsetX: -0.46,
+    modelOffsetY: -0.02,
+    focusDistance: 0.92,
+    dofBokehScale: 1.6
   },
-  // 5. WORKS - FLUTTER (Progress 0.46): Frames Flutter sticker clearly on the right, project list on left
-  // Flutter anchor: [-0.155, 0.105, 0.135]
+  // 5. WORKS GALLERY START (Progress 0.46): Profile stance on left, leaving stage for horizontal cards
   {
     progress: 0.46,
-    camPos: [-0.44, 0.13, 0.52],
-    target: [-0.155, 0.105, 0.135],
-    fov: 32,
-    modelRotY: 0.46,
-    modelOffsetX: 0.24,
-    modelOffsetY: 0.01,
-    focusDistance: 0.52,
-    dofBokehScale: 0.8
+    camPos: [-0.24, 0.08, 0.90],
+    target: [-0.05, 0.04, 0.06],
+    fov: 36,
+    modelRotY: 0.55,
+    modelOffsetX: -0.48,
+    modelOffsetY: -0.02,
+    focusDistance: 0.90,
+    dofBokehScale: 1.2
   },
-  // 6. WORKS - PYTHON (Progress 0.56): Glides to frame Python sticker
-  // Python anchor: [-0.150, 0.025, 0.150]
+  // 6. WORKS GALLERY MID (Progress 0.60): Expressive angle
   {
-    progress: 0.56,
-    camPos: [-0.43, 0.05, 0.53],
-    target: [-0.150, 0.025, 0.150],
-    fov: 32,
-    modelRotY: 0.46,
-    modelOffsetX: 0.24,
-    modelOffsetY: 0.01,
-    focusDistance: 0.53,
-    dofBokehScale: 0.8
+    progress: 0.60,
+    camPos: [-0.26, 0.07, 0.86],
+    target: [-0.06, 0.03, 0.07],
+    fov: 36,
+    modelRotY: 0.60,
+    modelOffsetX: -0.48,
+    modelOffsetY: -0.02,
+    focusDistance: 0.86,
+    dofBokehScale: 1.1
   },
-  // 7. WORKS - REACT.JS (Progress 0.66): Glides to frame React sticker
-  // React anchor: [-0.115, 0.072, 0.178]
+  // 7. WORKS GALLERY END (Progress 0.74)
   {
-    progress: 0.66,
-    camPos: [-0.36, 0.095, 0.55],
-    target: [-0.115, 0.072, 0.178],
-    fov: 32,
-    modelRotY: 0.40,
-    modelOffsetX: 0.24,
-    modelOffsetY: 0.01,
-    focusDistance: 0.55,
-    dofBokehScale: 0.8
+    progress: 0.74,
+    camPos: [-0.22, 0.07, 0.90],
+    target: [-0.05, 0.03, 0.05],
+    fov: 37,
+    modelRotY: 0.50,
+    modelOffsetX: -0.46,
+    modelOffsetY: -0.02,
+    focusDistance: 0.90,
+    dofBokehScale: 1.2
   },
-  // 8. WORKS - NODE.JS (Progress 0.76): Glides to frame Node.js sticker
-  // Node anchor: [-0.118, -0.022, 0.175]
-  {
-    progress: 0.76,
-    camPos: [-0.37, -0.01, 0.55],
-    target: [-0.118, -0.022, 0.175],
-    fov: 32,
-    modelRotY: 0.40,
-    modelOffsetX: 0.24,
-    modelOffsetY: 0.01,
-    focusDistance: 0.55,
-    dofBokehScale: 0.8
-  },
-  // 9. SKILLS (Progress 0.86): Neutral three-quarter view, avatar sharp again
+  // 8. SKILLS & TECH (Progress 0.86): Orbits to reveal other cheek and skills stickers
   {
     progress: 0.86,
-    camPos: [0.12, 0.05, 1.15],
+    camPos: [0.10, 0.06, 1.02],
     target: [0.0, 0.03, 0.0],
-    fov: 42,
-    modelRotY: -0.12,
-    modelOffsetX: 0.18,
+    fov: 40,
+    modelRotY: -0.25,
+    modelOffsetX: -0.40,
     modelOffsetY: -0.02,
-    focusDistance: 1.15,
+    focusDistance: 1.02,
     dofBokehScale: 1.4
   },
-  // 10. CONTACT (Progress 1.00): Orbits to SOCIAL CHEEK (GitHub, Instagram, Mail, Resume)
-  // Social cheek center: [0.14, 0.04, 0.16], model on left, contact cards on right
+  // 9. CONTACT / OUTRO (Progress 1.00): Friendly final stance
   {
     progress: 1.00,
-    camPos: [0.42, 0.06, 0.52],
-    target: [0.14, 0.04, 0.16],
-    fov: 33,
-    modelRotY: -0.48,
-    modelOffsetX: -0.22,
-    modelOffsetY: 0.01,
-    focusDistance: 0.52,
-    dofBokehScale: 0.8
+    camPos: [0.15, 0.05, 0.96],
+    target: [0.05, 0.03, 0.05],
+    fov: 38,
+    modelRotY: -0.36,
+    modelOffsetX: -0.38,
+    modelOffsetY: -0.02,
+    focusDistance: 0.96,
+    dofBokehScale: 1.0
   }
 ];
 
