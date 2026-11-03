@@ -11,7 +11,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
         <div className="about-intro">
           <h1 className="about-title">About Karan</h1>
           <p className="about-body">
-            I'm Karan — a Flutter + AI builder living where scalable code meets intelligent systems.
+            I'm Karan — a Software Developer living where scalable code meets intelligent systems.
             MCA graduate passionate about crafting intuitive user experiences and engineering robust, high-performance systems from concept to deployment.
           </p>
         </div>
