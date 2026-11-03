@@ -4,9 +4,9 @@ import { useMemo } from 'react';
 export function BackgroundSphere() {
   const uniforms = useMemo(
     () => ({
-      uTop: { value: new THREE.Color('#6f906f') },
-      uBottom: { value: new THREE.Color('#dbd3b5') },
-      uSteep: { value: 1.4 }
+      uTop: { value: new THREE.Color('#94a58b') },
+      uBottom: { value: new THREE.Color('#dfd6ba') },
+      uSteep: { value: 1.2 }
     }),
     []
   );
