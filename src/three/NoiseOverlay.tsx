@@ -100,7 +100,7 @@ export function NoiseOverlay() {
       }}
     >
       <Canvas
-        style={{ width: '100%', height: '100%', opacity: 0.62, pointerEvents: 'none' }}
+        style={{ width: '100%', height: '100%', opacity: 0.32, pointerEvents: 'none' }}
         camera={{ position: [0, 0, 1] }}
         gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }}
       >
