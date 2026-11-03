@@ -88,18 +88,18 @@ export function Scene({
           alpha: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.15
+          toneMappingExposure: 1.2
         }}
       >
         {/* Background gradient dome */}
         <BackgroundSphere />
 
         {/* Studio lighting matching reference website */}
-        <ambientLight intensity={0.65} color="#ffffff" />
-        <hemisphereLight args={['#ffffff', '#404040', 1.15]} />
-        <directionalLight position={[5, 8, 5]} intensity={2.35} color="#ffd9c6" />
-        <directionalLight position={[-5, 4, -4]} intensity={2.25} color="#9fc6ff" />
-        <directionalLight position={[0, -2, 2]} intensity={0.4} color="#dbd3b5" />
+        <ambientLight intensity={0.75} color="#ffffff" />
+        <hemisphereLight args={['#ffffff', '#505050', 1.2]} />
+        <directionalLight position={[5, 8, 5]} intensity={2.5} color="#ffd9c6" />
+        <directionalLight position={[-5, 4, -4]} intensity={2.2} color="#c6ddff" />
+        <directionalLight position={[0, -2, 2]} intensity={0.45} color="#dfd6ba" />
 
         <CameraRigController
           progress={progress}
