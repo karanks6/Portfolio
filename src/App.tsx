@@ -106,17 +106,6 @@ export default function App() {
 
   return (
     <div className="portfolio-app">
-      {/* Viewport cyan edge atmospheric vignette */}
-      <div className="viewport-vignette" />
-
-      {/* Background grain texture */}
-      <div className="grain-overlay" />
-
-      {/* Atmospheric scrim & glass rail */}
-      <div className="scrim" />
-      <div className="glass-rail" />
-      <div className="hero-gradient" />
-
       {/* Loading Screen */}
       {!isLoaded && <LoadingManagerComponent onLoaded={() => setIsLoaded(true)} />}
 
