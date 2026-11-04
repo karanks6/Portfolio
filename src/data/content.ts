@@ -16,7 +16,7 @@ export interface TimelineEntry {
 
 export const PERSONAL_INFO = {
   name: "Karan S Suvarna",
-  role: "Flutter + AI Builder",
+  role: "Software Developer",
   subtitle: "MCA graduate focused on software development, backend development, and AI-powered applications.",
   location: "Mangalore, Karnataka, India",
   email: "suvarnakaran77@gmail.com",
