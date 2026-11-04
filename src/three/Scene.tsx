@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { BackgroundSphere } from './BackgroundSphere';
 import { sampleCameraTimeline } from './CameraRig';
 import { Avatar } from './Avatar';
+import { Effects } from './Effects';
 import { HotspotScreenData } from './StickerHotspots';
 import { StickerDefinition } from '../data/stickers';
 
@@ -23,15 +24,18 @@ function CameraRigController({
   isReducedMotion: boolean;
   onModelParams: (rotY: number, ox: number, oy: number) => void;
 }) {
-  const currentCamPos = useRef(new THREE.Vector3(0, 0.04, 1.18));
-  const currentTarget = useRef(new THREE.Vector3(0, 0.02, 0));
+  const currentCamPos = useRef(new THREE.Vector3(0, 0.04, 1.25));
+  const currentTarget = useRef(new THREE.Vector3(0, 0.01, 0));
   const currentRotY = useRef(0);
   const currentOx = useRef(0);
   const currentOy = useRef(0);
+  const parallax = useRef(new THREE.Vector2(0, 0));
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, pointer }, delta) => {
     const targetPose = sampleCameraTimeline(isReducedMotion ? 0 : progress);
-    const lerpFactor = isReducedMotion ? 1 : 0.09;
+
+    // Frame-rate independent snappy exponential damping (matching Senbuzy's damping physics)
+    const lerpFactor = isReducedMotion ? 1 : Math.min(1, 1 - Math.exp(-14 * delta));
 
     currentCamPos.current.lerp(targetPose.camPos, lerpFactor);
     currentTarget.current.lerp(targetPose.target, lerpFactor);
@@ -39,7 +43,17 @@ function CameraRigController({
     currentOx.current = THREE.MathUtils.lerp(currentOx.current, targetPose.modelOffsetX, lerpFactor);
     currentOy.current = THREE.MathUtils.lerp(currentOy.current, targetPose.modelOffsetY, lerpFactor);
 
-    camera.position.copy(currentCamPos.current);
+    // Subtle 3.5 deg mouse parallax orbit around the target (from Senbuzy)
+    const targetParallaxX = isReducedMotion ? 0 : pointer.x * 0.035;
+    const targetParallaxY = isReducedMotion ? 0 : -pointer.y * 0.025;
+    parallax.current.x = THREE.MathUtils.lerp(parallax.current.x, targetParallaxX, 0.08);
+    parallax.current.y = THREE.MathUtils.lerp(parallax.current.y, targetParallaxY, 0.08);
+
+    camera.position.set(
+      currentCamPos.current.x + parallax.current.x,
+      currentCamPos.current.y + parallax.current.y,
+      currentCamPos.current.z
+    );
     camera.lookAt(currentTarget.current);
 
     if (camera instanceof THREE.PerspectiveCamera) {
@@ -81,10 +95,10 @@ export function Scene({
       }}
     >
       <Canvas
-        camera={{ position: [0, 0.04, 1.18], fov: 44, near: 0.1, far: 200 }}
+        camera={{ position: [0, 0.04, 1.25], fov: 44, near: 0.1, far: 200 }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{
-          antialias: true,
+          antialias: false,
           alpha: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
@@ -116,6 +130,9 @@ export function Scene({
           onHotspotsUpdate={onHotspotsUpdate}
           onStickerClick={onStickerClick}
         />
+
+        {/* Depth of Field & Bloom postprocessing */}
+        <Effects progress={progress} isReducedMotion={isReducedMotion} />
       </Canvas>
     </div>
   );
