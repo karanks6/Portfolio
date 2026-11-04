@@ -8,12 +8,13 @@ export interface CameraKeyframe {
   modelRotY: number;
   modelOffsetX: number;
   modelOffsetY: number;
-  focusDistance: number;
-  dofBokehScale?: number;
+  focusTarget: [number, number, number];
+  focusRange: number;
+  bokehScale: number;
 }
 
 export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
-  // 1. HERO (Progress 0.00): Front-facing poster pose, centered bust, sharp avatar
+  // 1. HERO (Progress 0.00): Centered front-facing, wide depth of field, gentle background blur
   {
     progress: 0.00,
     camPos: [0.0, 0.04, 1.25],
@@ -22,110 +23,123 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     modelRotY: 0.0,
     modelOffsetX: 0.0,
     modelOffsetY: -0.06,
-    focusDistance: 1.25,
-    dofBokehScale: 1.0
+    focusTarget: [0.0, 0.02, 0.0],
+    focusRange: 2.2,
+    bokehScale: 5.0
   },
-  // 2. HERO TRANSITION (Progress 0.10): Glides smoothly toward the left
+  // 2. HERO TRANSITION (Progress 0.08): Swiftly turns and docks to the left
   {
-    progress: 0.10,
-    camPos: [-0.10, 0.05, 1.15],
-    target: [0.0, 0.02, 0.0],
-    fov: 43,
-    modelRotY: 0.18,
-    modelOffsetX: -0.25,
+    progress: 0.08,
+    camPos: [-0.09, 0.05, 1.15],
+    target: [-0.02, 0.02, 0.0],
+    fov: 42,
+    modelRotY: 0.22,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.04,
-    focusDistance: 1.15,
-    dofBokehScale: 1.5
+    focusTarget: [-0.08, 0.03, 0.10],
+    focusRange: 1.1,
+    bokehScale: 7.5
   },
-  // 3. RÉSUMÉ / TIMELINE (Progress 0.22): Left-docked, 3/4 turn facing right toward timeline
+  // 3. RÉSUMÉ / TOOL STICKERS (Progress 0.18): 3/4 turn right, razor-thin macro focus on cheek stickers
   {
-    progress: 0.22,
-    camPos: [-0.16, 0.06, 1.02],
-    target: [0.0, 0.03, 0.0],
-    fov: 40,
-    modelRotY: 0.32,
-    modelOffsetX: -0.44,
+    progress: 0.18,
+    camPos: [-0.15, 0.06, 0.98],
+    target: [-0.04, 0.03, 0.05],
+    fov: 38,
+    modelRotY: 0.38,
+    modelOffsetX: -0.45,
     modelOffsetY: -0.03,
-    focusDistance: 1.02,
-    dofBokehScale: 1.8
+    focusTarget: [-0.14, 0.05, 0.15],
+    focusRange: 0.16,
+    bokehScale: 11.0
   },
-  // 4. RÉSUMÉ CONTINUED (Progress 0.34): Deep focus on face stickers, cleanly framed on left
+  // 4. RÉSUMÉ CONTINUED (Progress 0.34): Maximum bokeh blur, sharp focus locked on face stickers
   {
     progress: 0.34,
-    camPos: [-0.20, 0.07, 0.92],
-    target: [-0.04, 0.04, 0.05],
-    fov: 38,
-    modelRotY: 0.44,
+    camPos: [-0.18, 0.07, 0.90],
+    target: [-0.06, 0.04, 0.06],
+    fov: 36,
+    modelRotY: 0.45,
     modelOffsetX: -0.46,
     modelOffsetY: -0.02,
-    focusDistance: 0.92,
-    dofBokehScale: 1.6
+    focusTarget: [-0.14, 0.05, 0.15],
+    focusRange: 0.15,
+    bokehScale: 11.5
   },
-  // 5. WORKS GALLERY START (Progress 0.46): Profile stance on left, leaving stage for horizontal cards
+  // 5. WORKS GALLERY START (Progress 0.48): Left profile stance, leaving right half open for cards
   {
-    progress: 0.46,
-    camPos: [-0.24, 0.08, 0.90],
-    target: [-0.05, 0.04, 0.06],
+    progress: 0.48,
+    camPos: [-0.22, 0.08, 0.90],
+    target: [-0.06, 0.04, 0.06],
     fov: 36,
-    modelRotY: 0.55,
+    modelRotY: 0.52,
     modelOffsetX: -0.48,
     modelOffsetY: -0.02,
-    focusDistance: 0.90,
-    dofBokehScale: 1.2
+    focusTarget: [-0.12, 0.04, 0.10],
+    focusRange: 0.38,
+    bokehScale: 9.0
   },
-  // 6. WORKS GALLERY MID (Progress 0.60): Expressive angle
+  // 6. WORKS GALLERY MID (Progress 0.62): Expressive angle viewing horizontal slider
   {
-    progress: 0.60,
-    camPos: [-0.26, 0.07, 0.86],
-    target: [-0.06, 0.03, 0.07],
+    progress: 0.62,
+    camPos: [-0.24, 0.07, 0.88],
+    target: [-0.06, 0.03, 0.06],
     fov: 36,
-    modelRotY: 0.60,
+    modelRotY: 0.56,
     modelOffsetX: -0.48,
     modelOffsetY: -0.02,
-    focusDistance: 0.86,
-    dofBokehScale: 1.1
+    focusTarget: [-0.12, 0.03, 0.08],
+    focusRange: 0.45,
+    bokehScale: 8.5
   },
-  // 7. WORKS GALLERY END (Progress 0.74)
+  // 7. WORKS GALLERY END (Progress 0.74): Smooth transition out of horizontal track
   {
     progress: 0.74,
-    camPos: [-0.22, 0.07, 0.90],
+    camPos: [-0.20, 0.07, 0.92],
     target: [-0.05, 0.03, 0.05],
     fov: 37,
-    modelRotY: 0.50,
+    modelRotY: 0.48,
     modelOffsetX: -0.46,
     modelOffsetY: -0.02,
-    focusDistance: 0.90,
-    dofBokehScale: 1.2
+    focusTarget: [-0.10, 0.03, 0.08],
+    focusRange: 0.50,
+    bokehScale: 8.0
   },
-  // 8. SKILLS & TECH (Progress 0.86): Orbits to reveal other cheek and skills stickers
+  // 8. SKILLS & TECH (Progress 0.86): Orbits to reveal other cheek with social stickers
   {
     progress: 0.86,
-    camPos: [0.10, 0.06, 1.02],
-    target: [0.0, 0.03, 0.0],
-    fov: 40,
-    modelRotY: -0.25,
+    camPos: [0.10, 0.06, 0.96],
+    target: [0.02, 0.03, 0.02],
+    fov: 38,
+    modelRotY: -0.32,
     modelOffsetX: -0.40,
     modelOffsetY: -0.02,
-    focusDistance: 1.02,
-    dofBokehScale: 1.4
+    focusTarget: [0.13, 0.05, 0.15],
+    focusRange: 0.18,
+    bokehScale: 10.5
   },
-  // 9. CONTACT / OUTRO (Progress 1.00): Friendly final stance
+  // 9. CONTACT / OUTRO (Progress 1.00): Friendly final stance with balanced wide focus
   {
     progress: 1.00,
-    camPos: [0.15, 0.05, 0.96],
-    target: [0.05, 0.03, 0.05],
-    fov: 38,
-    modelRotY: -0.36,
+    camPos: [0.12, 0.05, 1.05],
+    target: [0.03, 0.03, 0.0],
+    fov: 40,
+    modelRotY: -0.28,
     modelOffsetX: -0.38,
     modelOffsetY: -0.02,
-    focusDistance: 0.96,
-    dofBokehScale: 1.0
+    focusTarget: [0.02, 0.02, 0.0],
+    focusRange: 1.8,
+    bokehScale: 6.0
   }
 ];
 
-function smoothstep(min: number, max: number, value: number) {
-  const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
-  return x * x * (3 - 2 * x);
+const DWELL_AMOUNT = 0.28; // 28% dwell pause at milestones
+
+function dwellInterpolate(rawT: number): number {
+  if (rawT <= DWELL_AMOUNT) return 0;
+  if (rawT >= 1 - DWELL_AMOUNT) return 1;
+  const inner = (rawT - DWELL_AMOUNT) / (1 - 2 * DWELL_AMOUNT);
+  return inner * inner * (3 - 2 * inner); // Smoothstep S-curve between plateaus
 }
 
 function lerp(a: number, b: number, t: number) {
@@ -149,7 +163,7 @@ export function sampleCameraTimeline(progress: number) {
 
   const range = k1.progress - k0.progress;
   const rawT = range > 0 ? (clamped - k0.progress) / range : 0;
-  const t = smoothstep(0, 1, rawT);
+  const t = dwellInterpolate(rawT);
 
   return {
     camPos: new THREE.Vector3(
@@ -166,7 +180,12 @@ export function sampleCameraTimeline(progress: number) {
     modelRotY: lerp(k0.modelRotY, k1.modelRotY, t),
     modelOffsetX: lerp(k0.modelOffsetX, k1.modelOffsetX, t),
     modelOffsetY: lerp(k0.modelOffsetY, k1.modelOffsetY, t),
-    focusDistance: lerp(k0.focusDistance, k1.focusDistance, t),
-    dofBokehScale: lerp(k0.dofBokehScale ?? 1, k1.dofBokehScale ?? 1, t)
+    focusTarget: new THREE.Vector3(
+      lerp(k0.focusTarget[0], k1.focusTarget[0], t),
+      lerp(k0.focusTarget[1], k1.focusTarget[1], t),
+      lerp(k0.focusTarget[2], k1.focusTarget[2], t)
+    ),
+    focusRange: lerp(k0.focusRange, k1.focusRange, t),
+    bokehScale: lerp(k0.bokehScale, k1.bokehScale, t)
   };
 }
