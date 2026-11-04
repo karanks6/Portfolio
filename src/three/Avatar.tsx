@@ -79,13 +79,13 @@ export function Avatar({
     const baseRotY = (isReducedMotion ? 0 : modelRotY) + headTrackingRef.current.x;
     const baseRotX = isReducedMotion ? 0 : headTrackingRef.current.y;
 
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, baseRotY, 0.1);
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, baseRotX, 0.1);
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, baseRotY, 0.25);
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, baseRotX, 0.25);
 
     const targetX = isReducedMotion ? 0 : modelOffsetX;
     const targetY = isReducedMotion ? -0.04 : modelOffsetY;
-    groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.1);
-    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.1);
+    groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.25);
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.25);
 
     const screenData: HotspotScreenData[] = [];
 
