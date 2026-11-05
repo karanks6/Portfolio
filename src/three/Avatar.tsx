@@ -165,3 +165,11 @@ export function Avatar({
     </group>
   );
 }
+
+useGLTF.preload('/portfolio/assets/3dmodel.glb', undefined, undefined, (loader: any) => {
+  loader.setMeshoptDecoder(MeshoptDecoder);
+  loader.register((parser: any) => {
+    parser.textureLoader = new THREE.TextureLoader(parser.options.manager);
+    return { name: 'ForceTextureLoader' };
+  });
+});
