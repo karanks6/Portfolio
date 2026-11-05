@@ -8,8 +8,7 @@
   --accent-peach: #ffd9b3;
   --font-serif: 'Cormorant Upright', serif;
   --font-hand: 'Mansalva', cursive;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --bg-dark: #8ea087;
+  --bg-dark: #44543e;
 }
 
 * {
@@ -52,14 +51,14 @@ body {
 .hero-frame {
   position: absolute;
   inset: var(--m);
-  border: 1px solid rgba(35, 48, 30, 0.16);
+  border: 1px solid rgba(244, 241, 234, 0.16);
 }
 
 .hero-mark {
   position: absolute;
   font-size: 13px;
   line-height: 1;
-  color: rgba(35, 48, 30, 0.42);
+  color: rgba(244, 241, 234, 0.45);
 }
 
 .hero-mark.tl {
@@ -92,15 +91,17 @@ body {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   line-height: 1.6;
-  color: rgba(35, 48, 30, 0.62);
+  color: rgba(244, 241, 234, 0.75);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .hero-meta .hm-name {
   display: block;
   text-transform: none;
   letter-spacing: 0.12em;
-  color: rgba(28, 38, 22, 0.88);
+  color: var(--ink);
   font-weight: 600;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .hm-tl {
@@ -148,14 +149,15 @@ body {
 .chrome-text-link {
   background: none;
   border: none;
-  color: rgba(28, 38, 22, 0.82);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.18em;
   cursor: pointer;
   padding: 6px 12px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .chrome-text-link:hover {
@@ -333,11 +335,12 @@ body {
   font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(35, 48, 30, 0.65);
+  color: rgba(244, 241, 234, 0.72);
   background: none;
   border: none;
   cursor: pointer;
   pointer-events: auto;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
 .scroll-cue-label {
@@ -349,7 +352,7 @@ body {
   width: 1px;
   height: 44px;
   overflow: hidden;
-  background: linear-gradient(rgba(35, 48, 30, 0.4), rgba(35, 48, 30, 0.05));
+  background: linear-gradient(rgba(244, 241, 234, 0.35), rgba(244, 241, 234, 0.05));
 }
 
 .scroll-cue-dot {
@@ -360,8 +363,8 @@ body {
   height: 9px;
   margin-left: -1.5px;
   border-radius: 2px;
-  background: rgba(35, 48, 30, 0.85);
-  box-shadow: none;
+  background: var(--ink);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
   animation: cueDot 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
@@ -417,6 +420,7 @@ body {
   font-size: clamp(32px, 5vw, 62px);
   letter-spacing: 0.02em;
   color: var(--ink);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
 }
 
 .timeline {
@@ -463,6 +467,7 @@ body {
   color: #f4f1eab8;
   margin-bottom: 0.6em;
   font-weight: 500;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .tl-head {
@@ -476,12 +481,14 @@ body {
   font-weight: 600;
   line-height: 1.25;
   color: var(--ink);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
 .tl-role {
   margin-top: 0.35em;
   font-size: 15px;
   color: #f4f1eacc;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
 }
 
 .tl-points {
@@ -498,6 +505,7 @@ body {
   font-size: 14px;
   line-height: 1.6;
   color: #f4f1eaf2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .tl-points li:before {
