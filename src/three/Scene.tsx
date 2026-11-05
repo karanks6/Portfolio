@@ -98,22 +98,22 @@ export function Scene({
         camera={{ position: [0, 0.04, 1.25], fov: 44, near: 0.1, far: 200 }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{
-          antialias: false,
+          antialias: true,
           alpha: true,
           powerPreference: 'high-performance',
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.2
+          toneMappingExposure: 1.05
         }}
       >
         {/* Background gradient dome */}
         <BackgroundSphere />
 
-        {/* Studio lighting matching reference website */}
+        {/* Studio lighting */}
         <ambientLight intensity={0.75} color="#ffffff" />
-        <hemisphereLight args={['#ffffff', '#505050', 1.2]} />
+        <hemisphereLight args={['#ffffff', '#383838', 1.1]} />
         <directionalLight position={[5, 8, 5]} intensity={2.5} color="#ffd9c6" />
         <directionalLight position={[-5, 4, -4]} intensity={2.2} color="#c6ddff" />
-        <directionalLight position={[0, -2, 2]} intensity={0.45} color="#dfd6ba" />
+        <directionalLight position={[0, -2, 2]} intensity={0.35} color="#6e6854" />
 
         <CameraRigController
           progress={progress}
