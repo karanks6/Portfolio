@@ -1,26 +1,43 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
-import fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
-function servePortfolioAssets() {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function servePortfolioAssets(): Plugin {
   return {
     name: 'serve-portfolio-assets',
-    configureServer(server: any) {
-      server.middlewares.use((req: any, res: any, next: any) => {
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
         const decodedUrl = decodeURIComponent(req.url || '');
         if (decodedUrl.startsWith('/portfolio/assets/') || decodedUrl.startsWith('/asset/')) {
           const filename = decodedUrl.replace(/^\/(portfolio\/assets|asset)\//, '').split('?')[0];
           const filePath = path.resolve(__dirname, 'asset', filename);
-          if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-            if (filename.endsWith('.glb')) {
-              res.setHeader('Content-Type', 'model/gltf-binary');
-            } else if (filename.endsWith('.pdf')) {
-              res.setHeader('Content-Type', 'application/pdf');
+          if (fs.existsSync(filePath)) {
+            const stat = fs.statSync(filePath);
+            if (stat.isFile()) {
+              const etag = `W/"${stat.size}-${Math.floor(stat.mtimeMs)}"`;
+              if (req.headers['if-none-match'] === etag) {
+                res.statusCode = 304;
+                res.end();
+                return;
+              }
+
+              if (filename.endsWith('.glb')) {
+                res.setHeader('Content-Type', 'model/gltf-binary');
+              } else if (filename.endsWith('.pdf')) {
+                res.setHeader('Content-Type', 'application/pdf');
+              }
+
+              res.setHeader('ETag', etag);
+              res.setHeader('Content-Length', stat.size);
+              res.setHeader('Accept-Ranges', 'bytes');
+              res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+              fs.createReadStream(filePath).pipe(res);
+              return;
             }
-            res.setHeader('Cache-Control', 'no-cache');
-            fs.createReadStream(filePath).pipe(res);
-            return;
           }
         }
         next();
