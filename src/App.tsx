@@ -14,14 +14,22 @@ import { STICKERS, StickerDefinition } from './data/stickers';
 import { HotspotScreenData } from './three/StickerHotspots';
 
 function LoadingManagerComponent({ onLoaded }: { onLoaded: () => void }) {
-  const { progress, active } = useProgress();
+  const { progress, active, total } = useProgress();
 
   useEffect(() => {
-    if (!active && progress >= 100) {
+    if (!active && (progress >= 100 || total === 0)) {
       const timer = setTimeout(onLoaded, 300);
       return () => clearTimeout(timer);
     }
-  }, [active, progress, onLoaded]);
+  }, [active, progress, total, onLoaded]);
+
+  // Safety fallback timeout for instant/cached loads
+  useEffect(() => {
+    const fallback = setTimeout(() => {
+      onLoaded();
+    }, 1800);
+    return () => clearTimeout(fallback);
+  }, [onLoaded]);
 
   return <Loader progress={progress} />;
 }
@@ -104,10 +112,14 @@ export default function App() {
     }
   }, [scrollToElement]);
 
+  const handleLoaded = useCallback(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <div className="portfolio-app">
       {/* Loading Screen */}
-      {!isLoaded && <LoadingManagerComponent onLoaded={() => setIsLoaded(true)} />}
+      {!isLoaded && <LoadingManagerComponent onLoaded={handleLoaded} />}
 
       {/* Fixed 3D WebGL Canvas */}
       {webGlAvailable && (
