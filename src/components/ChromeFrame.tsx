@@ -41,7 +41,7 @@ export const ChromeFrame: React.FC<ChromeFrameProps> = ({
 
       {/* Bottom-Left metadata (fades on scroll) */}
       <div className="hero-meta hm-bl" style={{ opacity: chromeFade, transition: 'opacity 0.2s ease' }}>
-        <span>CODE · AI · SYSTEMS</span>
+        <span>CODE <span className="hm-orange-dot">•</span> AI <span className="hm-orange-dot">•</span> SYSTEMS</span>
       </div>
 
       {/* Right-Edge vertical metadata (fades on scroll) */}
