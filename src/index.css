@@ -1,23 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Mansalva&family=Cormorant+Upright:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Mansalva&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #0F172A;
-  --bg-surface: #1E293B;
+  --bg-primary: #0B1118;
+  --bg-surface: #101923;
+  --dark-surface: #151E27;
+  --subtle-blue-grey: #1B2833;
   --accent-primary: #FF6B00;
   --accent-secondary: #F5A623;
-  --text-primary: #E5E7EB;
+  --text-primary: #F5F1EA;
   --text-muted: #94A3B8;
 
-  --ink: #E5E7EB;
+  --ink: #F5F1EA;
   --muted: #94A3B8;
-  --panel: rgba(30, 41, 59, 0.82);
-  --line: #334155;
-  --border-slate: #334155;
+  --panel: rgba(16, 25, 35, 0.85);
+  --line: rgba(190, 200, 210, 0.16);
+  --border-slate: rgba(190, 200, 210, 0.16);
   --accent-peach: #FF6B00;
-  --font-serif: 'Cormorant Upright', serif;
-  --font-hand: 'Mansalva', cursive;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-hand: 'Kalam', cursive;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --bg-dark: #0F172A;
+  --bg-dark: #0B1118;
 }
 
 * {
@@ -49,7 +51,7 @@ body {
 
 /* Hero Chrome & Viewport Frame */
 .hero-chrome {
-  --m: clamp(16px, 2.4vh, 30px);
+  --m: clamp(16px, 2.4vh, 28px);
   position: fixed;
   inset: 0;
   z-index: 12;
@@ -60,14 +62,14 @@ body {
 .hero-frame {
   position: absolute;
   inset: var(--m);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(190, 200, 210, 0.16);
   border-radius: 20px;
 }
 
 .hm-orange-dot {
   color: #FF6B00;
   font-weight: 700;
-  margin: 0 3px;
+  margin: 0 4px;
   display: inline-block;
 }
 
@@ -75,7 +77,7 @@ body {
   position: absolute;
   font-size: 13px;
   line-height: 1;
-  color: rgba(244, 241, 234, 0.45);
+  color: rgba(190, 200, 210, 0.35);
 }
 
 .hero-mark.tl {
@@ -108,8 +110,8 @@ body {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   line-height: 1.6;
-  color: rgba(244, 241, 234, 0.75);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  color: rgba(245, 241, 234, 0.85);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-meta .hm-name {
@@ -118,7 +120,7 @@ body {
   letter-spacing: 0.12em;
   color: var(--ink);
   font-weight: 600;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hm-tl {
@@ -136,14 +138,36 @@ body {
 .hm-bl {
   bottom: calc(var(--m) + 16px);
   left: calc(var(--m) + 20px);
+  letter-spacing: 0.24em;
+  color: rgba(245, 241, 234, 0.85);
 }
 
 .hm-right {
   top: 50%;
-  right: calc(var(--m) + 7px);
-  writing-mode: vertical-rl;
+  right: calc(var(--m) + 8px);
   transform: translateY(-50%);
-  letter-spacing: 0.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.hm-location-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FF6B00;
+  box-shadow: 0 0 8px rgba(255, 107, 0, 0.5);
+  display: block;
+}
+
+.hm-location-text {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.32em;
+  font-size: clamp(9px, 0.88vw, 10.5px);
+  color: rgba(245, 241, 234, 0.72);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 640px) {
@@ -294,13 +318,13 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: 6vh;
+  padding-bottom: clamp(18px, 3vh, 32px);
 }
 
 .about {
   text-align: center;
-  padding: 0 24px;
-  max-width: min(760px, 92vw);
+  padding: 0 20px;
+  max-width: min(800px, 92vw);
 }
 
 .about-intro {
@@ -315,47 +339,60 @@ body {
 
 .about-title {
   font-family: var(--font-hand);
-  font-weight: 400;
-  font-size: clamp(48px, 6vw, 76px);
-  line-height: 1.05;
+  font-weight: 700;
+  font-size: clamp(52px, 6.2vw, 82px);
+  line-height: 1.0;
   letter-spacing: 0.01em;
-  color: #E5E7EB;
+  color: #F5F1EA;
   margin-bottom: 0;
-  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.75);
   position: relative;
   display: inline-block;
 }
 
+.title-word-about {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.title-word-karan {
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
+}
+
 .about-sparks {
   position: absolute;
-  top: -16px;
-  right: -24px;
-  width: 38px;
-  height: 34px;
+  top: -14px;
+  right: -22px;
+  width: 32px;
+  height: 30px;
   pointer-events: none;
   filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.6));
 }
 
-.about-swoosh {
-  display: block;
-  margin: -4px auto 0;
-  width: clamp(140px, 18vw, 190px);
-  height: 14px;
+.about-underline {
+  position: absolute;
+  left: -8px;
+  right: -8px;
+  bottom: -10px;
+  width: calc(100% + 16px);
+  height: 20px;
   pointer-events: none;
-  filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.6));
+  filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.5));
 }
 
 .about-body {
-  margin: 18px auto 0;
-  font-family: var(--font-sans);
+  margin: 26px auto 0;
+  font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(14px, 1.15vw, 16px);
-  line-height: 1.65;
-  color: var(--text-primary);
-  max-width: 680px;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.55;
+  color: #F5F1EA;
+  max-width: 780px;
   text-align: center;
   letter-spacing: 0.01em;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
 }
 
 .about-link {
@@ -373,26 +410,26 @@ body {
 
 /* Scroll Cue */
 .scroll-cue {
-  margin-top: 3.2vh;
+  margin-top: clamp(14px, 2.2vh, 24px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  letter-spacing: 0.28em;
+  gap: 5px;
+  font-size: 10.5px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(245, 241, 234, 0.72);
   background: none;
   border: none;
   cursor: pointer;
   pointer-events: auto;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .scroll-cue-label {
   font-weight: 600;
   letter-spacing: 0.28em;
-  color: var(--text-muted);
+  color: rgba(245, 241, 234, 0.72);
 }
 
 .scroll-cue-chevron {
