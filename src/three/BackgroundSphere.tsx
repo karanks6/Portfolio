@@ -4,9 +4,10 @@ import { useMemo } from 'react';
 export function BackgroundSphere() {
   const uniforms = useMemo(
     () => ({
-      uTop: { value: new THREE.Color('#2d3b2a') },
-      uBottom: { value: new THREE.Color('#423d31') },
-      uSteep: { value: 1.2 }
+      uTop: { value: new THREE.Color('#1c2534') },
+      uBottom: { value: new THREE.Color('#0c1017') },
+      uGlowColor: { value: new THREE.Color('#2e3d55') },
+      uSteep: { value: 1.1 }
     }),
     []
   );
@@ -28,11 +29,19 @@ export function BackgroundSphere() {
         fragmentShader={`
           uniform vec3 uTop;
           uniform vec3 uBottom;
+          uniform vec3 uGlowColor;
           uniform float uSteep;
           varying vec3 vDir;
           void main() {
             float t = clamp(vDir.y * uSteep * 0.5 + 0.5, 0.0, 1.0);
-            gl_FragColor = vec4(mix(uBottom, uTop, t), 1.0);
+            vec3 base = mix(uBottom, uTop, t);
+            
+            // Soft studio cyclorama spotlight centered behind character
+            vec3 glowTarget = normalize(vec3(0.0, 0.06, -1.0));
+            float d = max(0.0, dot(vDir, -glowTarget));
+            float spot = pow(d, 3.2) * 0.42;
+            
+            gl_FragColor = vec4(base + uGlowColor * spot, 1.0);
           }
         `}
       />
