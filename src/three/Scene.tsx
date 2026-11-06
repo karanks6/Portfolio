@@ -106,7 +106,7 @@ export function Scene({
         }}
       >
         {/* Background gradient dome and clear color */}
-        <color attach="background" args={['#2d3b2a']} />
+        <color attach="background" args={['#10151f']} />
         <BackgroundSphere />
 
         {/* Studio lighting */}
