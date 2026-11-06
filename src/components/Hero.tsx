@@ -11,36 +11,47 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
         <div className="about-intro">
           <div className="about-title-container">
             <h1 className="about-title">
-              About Karan
-              {/* Three Radiating Orange Sparks / Flares above 'n' */}
-              <svg
-                className="about-sparks"
-                viewBox="0 0 38 34"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path d="M6 28 L2 14" stroke="#FF6B00" strokeWidth="3.5" strokeLinecap="round" />
-                <path d="M18 28 L22 8" stroke="#FF6B00" strokeWidth="3.5" strokeLinecap="round" />
-                <path d="M30 28 L36 16" stroke="#FF6B00" strokeWidth="3.5" strokeLinecap="round" />
-              </svg>
+              <span className="title-word-about">About</span>{' '}
+              <span className="title-word-karan">
+                Karan
+                {/* Three Radiating Orange Sparks / Flares above 'n' in Karan */}
+                <svg
+                  className="about-sparks"
+                  viewBox="0 0 32 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M4 24 L2 12" stroke="#FF6B00" strokeWidth="3.2" strokeLinecap="round" />
+                  <path d="M15 24 L18 6" stroke="#FF6B00" strokeWidth="3.2" strokeLinecap="round" />
+                  <path d="M26 25 L30 14" stroke="#FF6B00" strokeWidth="3.2" strokeLinecap="round" />
+                </svg>
+                {/* Dual Irregular Orange Hand-Drawn Underline Strokes under Karan */}
+                <svg
+                  className="about-underline"
+                  viewBox="0 0 170 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  {/* Primary smooth brush stroke */}
+                  <path
+                    d="M 6 7 C 45 12, 115 12, 164 6"
+                    stroke="#FF6B00"
+                    strokeWidth="3.4"
+                    strokeLinecap="round"
+                  />
+                  {/* Secondary slightly varied offset stroke */}
+                  <path
+                    d="M 32 14 C 68 18, 115 17, 148 12"
+                    stroke="#FF6B00"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    opacity="0.95"
+                  />
+                </svg>
+              </span>
             </h1>
-
-            {/* Orange Curved Underline Swoosh */}
-            <svg
-              className="about-swoosh"
-              viewBox="0 0 180 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M6 7 C45 15, 125 15, 174 5"
-                stroke="#FF6B00"
-                strokeWidth="4.5"
-                strokeLinecap="round"
-              />
-            </svg>
           </div>
 
           <p className="about-body">
@@ -60,16 +71,16 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
         <span className="scroll-cue-label">SCROLL</span>
         <svg
           className="scroll-cue-chevron"
-          width="18"
-          height="12"
-          viewBox="0 0 18 12"
+          width="16"
+          height="10"
+          viewBox="0 0 16 10"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M2 3L9 9L16 3"
+            d="M2 2.5L8 7.5L14 2.5"
             stroke="#FF6B00"
-            strokeWidth="2.5"
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
