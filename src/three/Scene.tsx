@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { BackgroundSphere } from './BackgroundSphere';
 import { sampleCameraTimeline } from './CameraRig';
 import { Avatar } from './Avatar';
 import { Effects } from './Effects';
@@ -105,9 +104,7 @@ export function Scene({
           toneMappingExposure: 1.05
         }}
       >
-        {/* Background gradient dome and clear color */}
-        <color attach="background" args={['#10151f']} />
-        <BackgroundSphere />
+
 
         {/* Studio lighting */}
         <ambientLight intensity={0.75} color="#ffffff" />
