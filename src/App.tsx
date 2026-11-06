@@ -7,11 +7,11 @@ import { Works } from './components/Works';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { Loader } from './components/Loader';
-import { StickerOverlay } from './components/StickerOverlay';
 import { Scene } from './three/Scene';
-import { NoiseOverlay } from './three/NoiseOverlay';
+import { StickerOverlay } from './components/StickerOverlay';
 import { STICKERS, StickerDefinition } from './data/stickers';
 import { HotspotScreenData } from './three/StickerHotspots';
+import { HeroBackdrop } from './components/HeroBackdrop';
 
 function LoadingManagerComponent({ onLoaded }: { onLoaded: () => void }) {
   const { progress, active, total } = useProgress();
@@ -121,6 +121,9 @@ export default function App() {
       {/* Loading Screen */}
       {!isLoaded && <LoadingManagerComponent onLoaded={handleLoaded} />}
 
+      {/* Fixed Backdrop Graphics (Waves + Sun Halo) */}
+      <HeroBackdrop scrollProgress={scrollProgress} />
+
       {/* Fixed 3D WebGL Canvas */}
       {webGlAvailable && (
         <Suspense fallback={null}>
@@ -132,9 +135,6 @@ export default function App() {
           />
         </Suspense>
       )}
-
-      {/* Procedural animated hatching noise shader overlay */}
-      {webGlAvailable && <NoiseOverlay />}
 
       {/* 2D Projected Hotspot Buttons */}
       {webGlAvailable && isLoaded && (
