@@ -14,16 +14,16 @@ export interface CameraKeyframe {
 }
 
 export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
-  // 1. HERO (Progress 0.00): Centered front-facing, wide depth of field, gentle background blur
+  // 1. HERO (Progress 0.00): Centered front-facing, head in upper-middle, smile clear of title
   {
     progress: 0.00,
-    camPos: [0.0, 0.04, 1.25],
-    target: [0.0, 0.01, 0.0],
+    camPos: [0.0, 0.07, 1.70],
+    target: [0.0, 0.04, 0.0],
     fov: 44,
     modelRotY: 0.0,
     modelOffsetX: 0.0,
-    modelOffsetY: -0.06,
-    focusTarget: [0.0, 0.02, 0.0],
+    modelOffsetY: 0.058,
+    focusTarget: [0.0, 0.04, 0.0],
     focusRange: 2.2,
     bokehScale: 5.0
   },
