@@ -105,7 +105,8 @@ export function Scene({
           toneMappingExposure: 1.05
         }}
       >
-        {/* Background gradient dome */}
+        {/* Background gradient dome and clear color */}
+        <color attach="background" args={['#2d3b2a']} />
         <BackgroundSphere />
 
         {/* Studio lighting */}
