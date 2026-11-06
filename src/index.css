@@ -11,7 +11,8 @@
   --ink: #E5E7EB;
   --muted: #94A3B8;
   --panel: rgba(30, 41, 59, 0.82);
-  --line: rgba(148, 163, 184, 0.15);
+  --line: #334155;
+  --border-slate: #334155;
   --accent-peach: #FF6B00;
   --font-serif: 'Cormorant Upright', serif;
   --font-hand: 'Mansalva', cursive;
@@ -318,7 +319,7 @@ body {
   font-size: clamp(48px, 6vw, 76px);
   line-height: 1.05;
   letter-spacing: 0.01em;
-  color: #FFFFFF;
+  color: #E5E7EB;
   margin-bottom: 0;
   text-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
   position: relative;
