@@ -29,6 +29,10 @@ function servePortfolioAssets(): Plugin {
                 res.setHeader('Content-Type', 'model/gltf-binary');
               } else if (filename.endsWith('.pdf')) {
                 res.setHeader('Content-Type', 'application/pdf');
+              } else if (filename.endsWith('.png')) {
+                res.setHeader('Content-Type', 'image/png');
+              } else if (filename.endsWith('.jpg') || filename.endsWith('.jpeg')) {
+                res.setHeader('Content-Type', 'image/jpeg');
               }
 
               res.setHeader('ETag', etag);
