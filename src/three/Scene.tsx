@@ -106,12 +106,12 @@ export function Scene({
       >
 
 
-        {/* Studio lighting */}
-        <ambientLight intensity={0.75} color="#ffffff" />
-        <hemisphereLight args={['#ffffff', '#383838', 1.1]} />
-        <directionalLight position={[5, 8, 5]} intensity={2.5} color="#ffd9c6" />
-        <directionalLight position={[-5, 4, -4]} intensity={2.2} color="#c6ddff" />
-        <directionalLight position={[0, -2, 2]} intensity={0.35} color="#6e6854" />
+        {/* Clean studio lighting with no orange reflection */}
+        <ambientLight intensity={0.8} color="#ffffff" />
+        <hemisphereLight args={['#ffffff', '#333333', 1.0]} />
+        <directionalLight position={[4, 6, 4]} intensity={2.2} color="#ffffff" />
+        <directionalLight position={[-4, 3, -3]} intensity={1.8} color="#d4e6ff" />
+        <directionalLight position={[0, -2, 2]} intensity={0.3} color="#ffffff" />
 
         <CameraRigController
           progress={progress}
