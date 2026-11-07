@@ -46,8 +46,10 @@ export const ChromeFrame: React.FC<ChromeFrameProps> = ({
 
       {/* Right-Edge vertical metadata (fades on scroll) */}
       <div className="hero-meta hm-right" style={{ opacity: chromeFade, transition: 'opacity 0.2s ease' }}>
+        <span className="hm-right-top-line" />
         <span className="hm-location-dot" />
         <span className="hm-location-text">BASED IN MANGALORE</span>
+        <span className="hm-right-bottom-line" />
       </div>
 
       {/* Top-Right action links (always accessible) */}
