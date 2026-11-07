@@ -26,28 +26,20 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
                   <path d="M15 24 L18 6" stroke="#FF6B00" strokeWidth="3.2" strokeLinecap="round" />
                   <path d="M26 25 L30 14" stroke="#FF6B00" strokeWidth="3.2" strokeLinecap="round" />
                 </svg>
-                {/* Dual Irregular Orange Hand-Drawn Underline Strokes under Karan */}
+                {/* Single Smooth Hand-Drawn Underline Stroke under Karan matching reference */}
                 <svg
                   className="about-underline"
-                  viewBox="0 0 170 20"
+                  viewBox="0 0 170 18"
+                  preserveAspectRatio="none"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                 >
-                  {/* Primary smooth brush stroke */}
                   <path
-                    d="M 6 7 C 45 12, 115 12, 164 6"
+                    d="M 6 8 C 50 13, 115 13, 164 6"
                     stroke="#FF6B00"
-                    strokeWidth="3.4"
+                    strokeWidth="3.6"
                     strokeLinecap="round"
-                  />
-                  {/* Secondary slightly varied offset stroke */}
-                  <path
-                    d="M 32 14 C 68 18, 115 17, 148 12"
-                    stroke="#FF6B00"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    opacity="0.95"
                   />
                 </svg>
               </span>
@@ -56,7 +48,9 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
 
           <p className="about-body">
             I'm Karan — a Software Developer living where scalable code meets intelligent systems.
+            <br className="hero-br" />
             MCA graduate passionate about crafting intuitive user experiences and engineering robust,
+            <br className="hero-br" />
             high-performance systems from concept to deployment.
           </p>
         </div>
