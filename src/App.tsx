@@ -73,7 +73,7 @@ export default function App() {
       setScrollProgress(progress);
 
       // Determine active section for vertical indicator dots
-      const sections = ['hero', 'resume', 'works', 'skills', 'contact'];
+      const sections = ['hero', 'resume', 'skills', 'works', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el) {
@@ -156,8 +156,8 @@ export default function App() {
       <main className="content-scroller">
         <Hero onScrollCue={() => scrollToElement('resume')} />
         <Timeline />
-        <Works onSelectTool={(toolId) => scrollToElement(toolId)} />
         <Skills />
+        <Works onSelectTool={(toolId) => scrollToElement(toolId)} />
         <Contact />
       </main>
     </div>
