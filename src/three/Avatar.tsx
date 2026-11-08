@@ -103,8 +103,8 @@ export function Avatar({
       const dot = tempNormal.current.dot(tempDir.current);
       tempVec.current.project(camera);
 
-      const isToolSection = progress >= 0.34 && progress <= 0.84;
-      const isSocialSection = progress >= 0.87;
+      const isToolSection = progress >= 0.14 && progress <= 0.88;
+      const isSocialSection = progress >= 0.89;
       const isRelevantSection =
         (sticker.type === 'tool' && isToolSection) ||
         (sticker.type === 'social' && isSocialSection);
