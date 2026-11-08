@@ -8,8 +8,8 @@ interface NavigationDotsProps {
 const SECTIONS = [
   { id: 'hero', label: 'Hero' },
   { id: 'resume', label: 'Résumé' },
-  { id: 'works', label: 'Works' },
   { id: 'skills', label: 'Skills' },
+  { id: 'works', label: 'Works' },
   { id: 'contact', label: 'Contact' }
 ];
 
