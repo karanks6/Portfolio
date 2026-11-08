@@ -53,9 +53,9 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.16,
     bokehScale: 11.0
   },
-  // 4. RÉSUMÉ CONTINUED (Progress 0.34): Maximum bokeh blur, sharp focus locked on face stickers
+  // 4. SKILLS & TECH (Progress 0.36): Razor-sharp focus on face stickers while docking on the left
   {
-    progress: 0.34,
+    progress: 0.36,
     camPos: [-0.18, 0.07, 0.90],
     target: [-0.06, 0.04, 0.06],
     fov: 36,
@@ -66,9 +66,9 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.15,
     bokehScale: 11.5
   },
-  // 5. WORKS GALLERY START (Progress 0.48): Left profile stance, leaving right half open for cards
+  // 5. WORKS GALLERY START (Progress 0.50): Left profile stance, leaving right half open for cards
   {
-    progress: 0.48,
+    progress: 0.50,
     camPos: [-0.22, 0.08, 0.90],
     target: [-0.06, 0.04, 0.06],
     fov: 36,
@@ -79,9 +79,9 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.38,
     bokehScale: 9.0
   },
-  // 6. WORKS GALLERY MID (Progress 0.62): Expressive angle viewing horizontal slider
+  // 6. WORKS GALLERY MID (Progress 0.70): Expressive angle viewing horizontal slider
   {
-    progress: 0.62,
+    progress: 0.70,
     camPos: [-0.24, 0.07, 0.88],
     target: [-0.06, 0.03, 0.06],
     fov: 36,
@@ -92,9 +92,9 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.45,
     bokehScale: 8.5
   },
-  // 7. WORKS GALLERY END (Progress 0.74): Smooth transition out of horizontal track
+  // 7. WORKS GALLERY END (Progress 0.86): Smooth transition out of horizontal track
   {
-    progress: 0.74,
+    progress: 0.86,
     camPos: [-0.20, 0.07, 0.92],
     target: [-0.05, 0.03, 0.05],
     fov: 37,
@@ -105,9 +105,9 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.50,
     bokehScale: 8.0
   },
-  // 8. SKILLS & TECH (Progress 0.86): Orbits to reveal other cheek with social stickers
+  // 8. CONTACT TRANSITION (Progress 0.94): Orbits to reveal other cheek with social stickers
   {
-    progress: 0.86,
+    progress: 0.94,
     camPos: [0.10, 0.06, 0.96],
     target: [0.02, 0.03, 0.02],
     fov: 38,
