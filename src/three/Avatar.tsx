@@ -63,7 +63,7 @@ export function Avatar({
     if (!groupRef.current) return;
 
     const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
-    const isCloseup = (progress > 0.42 && progress < 0.82) || progress > 0.95;
+    const isCloseup = progress >= 0.42;
 
     let targetHeadX = 0;
     let targetHeadY = 0;
@@ -103,8 +103,8 @@ export function Avatar({
       const dot = tempNormal.current.dot(tempDir.current);
       tempVec.current.project(camera);
 
-      const isToolSection = progress >= 0.14 && progress <= 0.88;
-      const isSocialSection = progress >= 0.89;
+      const isToolSection = progress >= 0.14 && progress <= 0.42;
+      const isSocialSection = progress >= 0.91;
       const isRelevantSection =
         (sticker.type === 'tool' && isToolSection) ||
         (sticker.type === 'social' && isSocialSection);
