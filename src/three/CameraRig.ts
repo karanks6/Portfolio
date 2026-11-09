@@ -54,13 +54,13 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.35,
     bokehScale: 8.0
   },
-  // 4. SKILLS & TECH (Progress 0.36): Matching 3D model alignment used in Résumé
+  // 4. SKILLS & TECH (Progress 0.36): Turned 45 degrees for clear visibility of tool stickers on right cheek
   {
     progress: 0.36,
     camPos: [-0.15, 0.05, 1.16],
     target: [-0.04, 0.03, 0.04],
     fov: 39,
-    modelRotY: 0.38,
+    modelRotY: 0.785, // 45 degrees
     modelOffsetX: -0.40,
     modelOffsetY: -0.02,
     focusTarget: [-0.12, 0.05, 0.14],
@@ -73,7 +73,7 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     camPos: [-0.15, 0.05, 1.16],
     target: [-0.04, 0.03, 0.04],
     fov: 39,
-    modelRotY: 0.38,
+    modelRotY: 0.785, // Start continuous rotation from Skills 45 deg pose
     modelOffsetX: -0.40,
     modelOffsetY: -0.02,
     focusTarget: [-0.04, 0.03, 0.04],
@@ -87,7 +87,7 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     camPos: [-0.10, 0.05, 1.18],
     target: [-0.03, 0.03, 0.04],
     fov: 40,
-    modelRotY: -1.35,
+    modelRotY: -1.05,
     modelOffsetX: -0.28,
     modelOffsetY: -0.02,
     focusTarget: [-0.03, 0.03, 0.04],
@@ -101,7 +101,7 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     camPos: [-0.10, 0.05, 1.18],
     target: [-0.03, 0.03, 0.04],
     fov: 40,
-    modelRotY: -3.09,
+    modelRotY: -2.89,
     modelOffsetX: -0.28,
     modelOffsetY: -0.02,
     focusTarget: [-0.03, 0.03, 0.04],
@@ -115,7 +115,7 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     camPos: [-0.10, 0.05, 1.18],
     target: [-0.03, 0.03, 0.04],
     fov: 40,
-    modelRotY: -4.83,
+    modelRotY: -4.73,
     modelOffsetX: -0.28,
     modelOffsetY: -0.02,
     focusTarget: [-0.03, 0.03, 0.04],
