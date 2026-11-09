@@ -31,123 +31,123 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
   // 2. HERO TRANSITION (Progress 0.08): Swiftly turns and docks to the left
   {
     progress: 0.08,
-    camPos: [-0.09, 0.05, 1.15],
-    target: [-0.02, 0.02, 0.0],
-    fov: 42,
-    modelRotY: 0.22,
-    modelOffsetX: -0.28,
-    modelOffsetY: -0.04,
-    focusTarget: [-0.08, 0.03, 0.10],
-    focusRange: 1.1,
-    bokehScale: 7.5
+    camPos: [-0.06, 0.04, 1.25],
+    target: [-0.01, 0.03, 0.0],
+    fov: 41,
+    modelRotY: 0.20,
+    modelOffsetX: -0.20,
+    modelOffsetY: -0.01,
+    focusTarget: [-0.05, 0.03, 0.08],
+    focusRange: 1.5,
+    bokehScale: 6.0
   },
-  // 3. RÉSUMÉ / TOOL STICKERS (Progress 0.18): 3/4 turn right, razor-thin macro focus on cheek stickers
+  // 3. RÉSUMÉ / TOOL STICKERS (Progress 0.18): Centered between screen left edge and timeline text
   {
     progress: 0.18,
-    camPos: [-0.15, 0.06, 0.98],
-    target: [-0.04, 0.03, 0.05],
-    fov: 38,
+    camPos: [-0.15, 0.05, 1.16],
+    target: [-0.04, 0.03, 0.04],
+    fov: 39,
     modelRotY: 0.38,
-    modelOffsetX: -0.45,
-    modelOffsetY: -0.03,
-    focusTarget: [-0.14, 0.05, 0.15],
-    focusRange: 0.16,
-    bokehScale: 11.0
+    modelOffsetX: -0.40,
+    modelOffsetY: -0.02,
+    focusTarget: [-0.12, 0.05, 0.14],
+    focusRange: 0.35,
+    bokehScale: 8.0
   },
-  // 4. SKILLS & TECH (Progress 0.36): Razor-sharp focus on face stickers while docking on the left
+  // 4. SKILLS & TECH (Progress 0.36): Clear, full face visibility with tool stickers in frame
   {
     progress: 0.36,
-    camPos: [-0.18, 0.07, 0.90],
-    target: [-0.06, 0.04, 0.06],
-    fov: 36,
+    camPos: [-0.10, 0.05, 1.18],
+    target: [-0.03, 0.03, 0.04],
+    fov: 40,
     modelRotY: 0.45,
-    modelOffsetX: -0.46,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [-0.14, 0.05, 0.15],
-    focusRange: 0.15,
-    bokehScale: 11.5
+    focusTarget: [-0.10, 0.04, 0.12],
+    focusRange: 0.45,
+    bokehScale: 6.5
   },
   // 5. WORKS GALLERY START (Progress 0.42): Entry into Works gallery, starts continuous 360 rotation
   {
     progress: 0.42,
-    camPos: [-0.20, 0.07, 0.92],
-    target: [-0.05, 0.03, 0.05],
-    fov: 37,
+    camPos: [-0.10, 0.05, 1.18],
+    target: [-0.03, 0.03, 0.04],
+    fov: 40,
     modelRotY: 0.45,
-    modelOffsetX: -0.46,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [-0.05, 0.03, 0.05],
+    focusTarget: [-0.03, 0.03, 0.04],
     focusRange: 2.5,
-    bokehScale: 4.5,
+    bokehScale: 3.5,
     linear: true
   },
   // 6. WORKS GALLERY 1/4 (Progress 0.55): Turns towards project cards (rotated ~90 deg)
   {
     progress: 0.55,
-    camPos: [-0.21, 0.07, 0.92],
-    target: [-0.05, 0.03, 0.05],
-    fov: 37,
+    camPos: [-0.10, 0.05, 1.18],
+    target: [-0.03, 0.03, 0.04],
+    fov: 40,
     modelRotY: -1.30,
-    modelOffsetX: -0.46,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [-0.05, 0.03, 0.05],
+    focusTarget: [-0.03, 0.03, 0.04],
     focusRange: 2.5,
-    bokehScale: 4.5,
+    bokehScale: 3.5,
     linear: true
   },
   // 7. WORKS GALLERY MID (Progress 0.68): Back of head & hair showcase (rotated ~180 deg)
   {
     progress: 0.68,
-    camPos: [-0.21, 0.07, 0.92],
-    target: [-0.05, 0.03, 0.05],
-    fov: 37,
+    camPos: [-0.10, 0.05, 1.18],
+    target: [-0.03, 0.03, 0.04],
+    fov: 40,
     modelRotY: -3.05,
-    modelOffsetX: -0.46,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [-0.05, 0.03, 0.05],
+    focusTarget: [-0.03, 0.03, 0.04],
     focusRange: 2.5,
-    bokehScale: 4.5,
+    bokehScale: 3.5,
     linear: true
   },
   // 8. WORKS GALLERY 3/4 (Progress 0.81): Turning back to front from the left (rotated ~270 deg)
   {
     progress: 0.81,
-    camPos: [-0.20, 0.07, 0.92],
-    target: [-0.05, 0.03, 0.05],
-    fov: 37,
+    camPos: [-0.10, 0.05, 1.18],
+    target: [-0.03, 0.03, 0.04],
+    fov: 40,
     modelRotY: -4.81,
-    modelOffsetX: -0.46,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [-0.05, 0.03, 0.05],
+    focusTarget: [-0.03, 0.03, 0.04],
     focusRange: 2.5,
-    bokehScale: 4.5,
+    bokehScale: 3.5,
     linear: true
   },
   // 9. WORKS END / CONTACT ENTRY (Progress 0.94): Completes 360 rotation, left cheek with social stickers faces camera
   {
     progress: 0.94,
-    camPos: [0.10, 0.06, 0.98],
+    camPos: [0.08, 0.05, 1.15],
     target: [0.02, 0.03, 0.02],
-    fov: 38,
+    fov: 40,
     modelRotY: -6.563,
-    modelOffsetX: -0.40,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [0.13, 0.05, 0.15],
-    focusRange: 0.22,
-    bokehScale: 9.5
+    focusTarget: [0.10, 0.05, 0.15],
+    focusRange: 0.40,
+    bokehScale: 7.5
   },
   // 10. CONTACT / OUTRO (Progress 1.00): Friendly final stance with social links active
   {
     progress: 1.00,
-    camPos: [0.12, 0.05, 1.05],
-    target: [0.03, 0.03, 0.0],
+    camPos: [0.10, 0.05, 1.18],
+    target: [0.02, 0.03, 0.0],
     fov: 40,
     modelRotY: -6.563,
-    modelOffsetX: -0.38,
+    modelOffsetX: -0.28,
     modelOffsetY: -0.02,
-    focusTarget: [0.13, 0.05, 0.15],
-    focusRange: 0.25,
-    bokehScale: 7.0
+    focusTarget: [0.10, 0.05, 0.15],
+    focusRange: 0.40,
+    bokehScale: 6.5
   }
 ];
 
