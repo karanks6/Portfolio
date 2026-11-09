@@ -11,6 +11,7 @@ export interface CameraKeyframe {
   focusTarget: [number, number, number];
   focusRange: number;
   bokehScale: number;
+  linear?: boolean;
 }
 
 export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
@@ -66,70 +67,87 @@ export const CAMERA_KEYFRAMES: CameraKeyframe[] = [
     focusRange: 0.15,
     bokehScale: 11.5
   },
-  // 5. WORKS GALLERY START (Progress 0.50): Left profile stance, leaving right half open for cards
+  // 5. WORKS GALLERY START (Progress 0.42): Entry into Works gallery, starts continuous 360 rotation
   {
-    progress: 0.50,
-    camPos: [-0.22, 0.08, 0.90],
-    target: [-0.06, 0.04, 0.06],
-    fov: 36,
-    modelRotY: 0.52,
-    modelOffsetX: -0.48,
-    modelOffsetY: -0.02,
-    focusTarget: [-0.12, 0.04, 0.10],
-    focusRange: 0.38,
-    bokehScale: 9.0
-  },
-  // 6. WORKS GALLERY MID (Progress 0.70): Expressive angle viewing horizontal slider
-  {
-    progress: 0.70,
-    camPos: [-0.24, 0.07, 0.88],
-    target: [-0.06, 0.03, 0.06],
-    fov: 36,
-    modelRotY: 0.56,
-    modelOffsetX: -0.48,
-    modelOffsetY: -0.02,
-    focusTarget: [-0.12, 0.03, 0.08],
-    focusRange: 0.45,
-    bokehScale: 8.5
-  },
-  // 7. WORKS GALLERY END (Progress 0.86): Smooth transition out of horizontal track
-  {
-    progress: 0.86,
+    progress: 0.42,
     camPos: [-0.20, 0.07, 0.92],
     target: [-0.05, 0.03, 0.05],
     fov: 37,
-    modelRotY: 0.48,
+    modelRotY: 0.45,
     modelOffsetX: -0.46,
     modelOffsetY: -0.02,
-    focusTarget: [-0.10, 0.03, 0.08],
-    focusRange: 0.50,
-    bokehScale: 8.0
+    focusTarget: [-0.05, 0.03, 0.05],
+    focusRange: 2.5,
+    bokehScale: 4.5,
+    linear: true
   },
-  // 8. CONTACT TRANSITION (Progress 0.94): Orbits to reveal other cheek with social stickers
+  // 6. WORKS GALLERY 1/4 (Progress 0.55): Turns towards project cards (rotated ~90 deg)
+  {
+    progress: 0.55,
+    camPos: [-0.21, 0.07, 0.92],
+    target: [-0.05, 0.03, 0.05],
+    fov: 37,
+    modelRotY: -1.30,
+    modelOffsetX: -0.46,
+    modelOffsetY: -0.02,
+    focusTarget: [-0.05, 0.03, 0.05],
+    focusRange: 2.5,
+    bokehScale: 4.5,
+    linear: true
+  },
+  // 7. WORKS GALLERY MID (Progress 0.68): Back of head & hair showcase (rotated ~180 deg)
+  {
+    progress: 0.68,
+    camPos: [-0.21, 0.07, 0.92],
+    target: [-0.05, 0.03, 0.05],
+    fov: 37,
+    modelRotY: -3.05,
+    modelOffsetX: -0.46,
+    modelOffsetY: -0.02,
+    focusTarget: [-0.05, 0.03, 0.05],
+    focusRange: 2.5,
+    bokehScale: 4.5,
+    linear: true
+  },
+  // 8. WORKS GALLERY 3/4 (Progress 0.81): Turning back to front from the left (rotated ~270 deg)
+  {
+    progress: 0.81,
+    camPos: [-0.20, 0.07, 0.92],
+    target: [-0.05, 0.03, 0.05],
+    fov: 37,
+    modelRotY: -4.81,
+    modelOffsetX: -0.46,
+    modelOffsetY: -0.02,
+    focusTarget: [-0.05, 0.03, 0.05],
+    focusRange: 2.5,
+    bokehScale: 4.5,
+    linear: true
+  },
+  // 9. WORKS END / CONTACT ENTRY (Progress 0.94): Completes 360 rotation, left cheek with social stickers faces camera
   {
     progress: 0.94,
-    camPos: [0.10, 0.06, 0.96],
+    camPos: [0.10, 0.06, 0.98],
     target: [0.02, 0.03, 0.02],
     fov: 38,
-    modelRotY: -0.32,
+    modelRotY: -6.563,
     modelOffsetX: -0.40,
     modelOffsetY: -0.02,
     focusTarget: [0.13, 0.05, 0.15],
-    focusRange: 0.18,
-    bokehScale: 10.5
+    focusRange: 0.22,
+    bokehScale: 9.5
   },
-  // 9. CONTACT / OUTRO (Progress 1.00): Friendly final stance with balanced wide focus
+  // 10. CONTACT / OUTRO (Progress 1.00): Friendly final stance with social links active
   {
     progress: 1.00,
     camPos: [0.12, 0.05, 1.05],
     target: [0.03, 0.03, 0.0],
     fov: 40,
-    modelRotY: -0.28,
+    modelRotY: -6.563,
     modelOffsetX: -0.38,
     modelOffsetY: -0.02,
-    focusTarget: [0.02, 0.02, 0.0],
-    focusRange: 1.8,
-    bokehScale: 6.0
+    focusTarget: [0.13, 0.05, 0.15],
+    focusRange: 0.25,
+    bokehScale: 7.0
   }
 ];
 
@@ -163,7 +181,7 @@ export function sampleCameraTimeline(progress: number) {
 
   const range = k1.progress - k0.progress;
   const rawT = range > 0 ? (clamped - k0.progress) / range : 0;
-  const t = dwellInterpolate(rawT);
+  const t = k0.linear ? rawT : dwellInterpolate(rawT);
 
   return {
     camPos: new THREE.Vector3(
