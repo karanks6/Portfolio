@@ -54,14 +54,6 @@ export const ChromeFrame: React.FC<ChromeFrameProps> = ({
 
       {/* Top-Right action links (always accessible) */}
       <div className="chrome-actions">
-        <button
-          onClick={() => onNavigate('works')}
-          className="chrome-text-link"
-          aria-label="View Portfolio Works"
-        >
-          PORTFOLIO
-        </button>
-
         <a
           href={PERSONAL_INFO.socials.github}
           target="_blank"
