@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { PROJECTS, Project } from '../data/content';
 import { ExternalLink, X } from 'lucide-react';
 import { GithubIcon } from './Icons';
@@ -30,9 +31,9 @@ const CARDS_DATA = [
       {
         ...PROJECTS.flutter[1],
         cardNo: '01',
-        category: 'Flutter Multiplatform',
-        metric: 'Dart & Flutter',
-        tag: 'Mobile Application'
+        category: 'Vedic Astrology & Numerology',
+        metric: 'Swiss Ephemeris',
+        tag: 'Flutter & Dart'
       }
     ]
   },
@@ -58,16 +59,16 @@ const CARDS_DATA = [
       {
         ...PROJECTS.react[0],
         cardNo: '03',
-        category: 'Interactive 3D Web',
-        metric: 'WebGL Model Viewer',
+        category: 'Interactive 3D Web & Configurator',
+        metric: 'Real-time WebGL',
         tag: 'Three.js & React'
       },
       {
         ...PROJECTS.react[1],
         cardNo: '03',
-        category: 'EdTech Web Platform',
-        metric: 'Frontend Web',
-        tag: 'React.js'
+        category: 'Astronomical & 3D Web Experience',
+        metric: 'Keplerian Physics',
+        tag: 'WebGL & GLSL Shaders'
       }
     ]
   },
@@ -220,82 +221,84 @@ export const Works: React.FC<WorksProps> = () => {
       </div>
 
       {/* Project Details Modal */}
-      {selectedProject && (
-        <>
-          <div
-            className="wk-detail-backdrop"
-            onClick={() => setSelectedProject(null)}
-          />
-          <div
-            className="wk-detail"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="wk-modal-title"
-          >
-            <button
-              type="button"
-              className="wk-detail-close"
+      {selectedProject &&
+        createPortal(
+          <>
+            <div
+              className="wk-detail-backdrop"
               onClick={() => setSelectedProject(null)}
-              aria-label="Close project modal"
+            />
+            <div
+              className="wk-detail"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="wk-modal-title"
             >
-              <X size={18} />
-            </button>
+              <button
+                type="button"
+                className="wk-detail-close"
+                onClick={() => setSelectedProject(null)}
+                aria-label="Close project modal"
+              >
+                <X size={18} />
+              </button>
 
-            <div className="wk-detail-banner is-ph">
-              <span className="wk-detail-ph-text">{selectedProject.title}</span>
-            </div>
-
-            <article className="wk-detail-article">
-              <header className="wk-detail-head">
-                <h3 id="wk-modal-title" className="wk-detail-title">
-                  {selectedProject.title}
-                </h3>
-                <div className="wk-detail-sub">{selectedProject.category}</div>
-
-                {selectedProject.stack && selectedProject.stack.length > 0 && (
-                  <div className="wk-detail-tags">
-                    {selectedProject.stack.map((item, sIdx) => (
-                      <span key={sIdx} className="wk-badge">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </header>
-
-              <div className="wk-detail-desc">
-                {selectedProject.description ||
-                  'Specialized engineering project focused on high performance, clean architecture, and intuitive user experiences.'}
+              <div className="wk-detail-banner is-ph">
+                <span className="wk-detail-ph-text">{selectedProject.title}</span>
               </div>
 
-              <div className="wk-detail-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '24px' }}>
-                <a
-                  href={selectedProject.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="wk-detail-link"
-                >
-                  <GithubIcon size={16} />
-                  <span>View Repository</span>
-                </a>
+              <article className="wk-detail-article">
+                <header className="wk-detail-head">
+                  <h3 id="wk-modal-title" className="wk-detail-title">
+                    {selectedProject.title}
+                  </h3>
+                  <div className="wk-detail-sub">{selectedProject.category}</div>
 
-                {selectedProject.liveDemoUrl && (
+                  {selectedProject.stack && selectedProject.stack.length > 0 && (
+                    <div className="wk-detail-tags">
+                      {selectedProject.stack.map((item, sIdx) => (
+                        <span key={sIdx} className="wk-badge">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </header>
+
+                <div className="wk-detail-desc">
+                  {selectedProject.description ||
+                    'Specialized engineering project focused on high performance, clean architecture, and intuitive user experiences.'}
+                </div>
+
+                <div className="wk-detail-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '24px' }}>
                   <a
-                    href={selectedProject.liveDemoUrl}
+                    href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="wk-detail-link"
-                    style={{ borderColor: 'rgba(244, 241, 234, 0.4)', color: 'var(--ink)' }}
                   >
-                    <ExternalLink size={16} />
-                    <span>Live Demo</span>
+                    <GithubIcon size={16} />
+                    <span>View Repository</span>
                   </a>
-                )}
-              </div>
-            </article>
-          </div>
-        </>
-      )}
+
+                  {selectedProject.liveDemoUrl && (
+                    <a
+                      href={selectedProject.liveDemoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="wk-detail-link"
+                      style={{ borderColor: 'rgba(244, 241, 234, 0.4)', color: 'var(--ink)' }}
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                </div>
+              </article>
+            </div>
+          </>,
+          document.body
+        )}
     </section>
   );
 };
