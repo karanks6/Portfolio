@@ -12,6 +12,7 @@ import { StickerOverlay } from './components/StickerOverlay';
 import { STICKERS, StickerDefinition } from './data/stickers';
 import { HotspotScreenData } from './three/StickerHotspots';
 import { HeroBackdrop } from './components/HeroBackdrop';
+import { Analytics } from '@vercel/analytics/react';
 
 function LoadingManagerComponent({ onLoaded }: { onLoaded: () => void }) {
   const { progress, active, total } = useProgress();
@@ -160,6 +161,9 @@ export default function App() {
         <Works onSelectTool={(toolId) => scrollToElement(toolId)} />
         <Contact />
       </main>
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
