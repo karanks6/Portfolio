@@ -1,4 +1,4 @@
-# 🌐 Karan S Suvarna — 3D Interactive Portfolio
+# 🌐 AboutKaran — 3D Interactive Portfolio
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-aboutkaran.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://aboutkaran.vercel.app/)
 [![React](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
