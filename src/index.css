@@ -1069,6 +1069,8 @@ body {
     left: 14px;
     display: flex;
     align-items: center;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   .hm-tl .hm-name {
@@ -1139,6 +1141,7 @@ body {
     width: 100%;
     margin: 0 0 20px 0;
     font-size: clamp(28px, 7vw, 38px);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 24px rgba(10, 14, 22, 0.9);
   }
 
   .timeline {

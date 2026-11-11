@@ -47,9 +47,9 @@ export const Hero: React.FC<HeroProps> = ({ onScrollCue }) => {
           </div>
 
           <p className="about-body">
-            I'm Karan — a Software Developer living where scalable code meets intelligent systems.
+            I'm Karan — a Software Developer living where scalable code meets intelligent systems.{' '}
             <br className="hero-br" />
-            MCA graduate passionate about crafting intuitive user experiences and engineering robust,
+            MCA graduate passionate about crafting intuitive user experiences and engineering robust,{' '}
             <br className="hero-br" />
             high-performance systems from concept to deployment.
           </p>

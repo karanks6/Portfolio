@@ -44,7 +44,7 @@ function CameraRigController({
     const targetFov = targetPose.fov + portraitFovBoost;
 
     const targetOffsetX = isPortrait
-      ? (progress < 0.08 ? 0 : targetPose.modelOffsetX * 0.45)
+      ? (progress < 0.08 ? 0 : targetPose.modelOffsetX * 0.55)
       : targetPose.modelOffsetX;
     const targetOffsetY = isPortrait
       ? (progress < 0.08 ? targetPose.modelOffsetY + 0.05 : targetPose.modelOffsetY)
