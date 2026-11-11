@@ -839,7 +839,7 @@ body {
 .wk-detail-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 65;
+  z-index: 1000;
   background: #04060a99;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -848,7 +848,7 @@ body {
 .wk-detail {
   position: fixed;
   inset: clamp(16px, 5vh, 56px) clamp(16px, 6vw, 120px);
-  z-index: 70;
+  z-index: 1001;
   background: #1d2124fa;
   border: 1px solid var(--line);
   border-radius: 20px;
