@@ -17,6 +17,7 @@ export const StickerOverlay: React.FC<StickerOverlayProps> = ({
 
   return (
     <div
+      className="sticker-overlay"
       style={{
         position: 'fixed',
         inset: 0,

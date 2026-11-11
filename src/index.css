@@ -1027,55 +1027,350 @@ body {
   }
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 640px) {
+/* ==========================================================================
+   Mobile & Smaller Screens Optimization
+   CRITICAL: Applied exclusively inside max-width media queries.
+   Web/Desktop (> 768px) is 100% UNTOUCHED and identical.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* 1. Chrome Frame & Header Bar */
   .hero-chrome {
-    --m: 12px;
+    --m: 10px;
   }
-  .glass-rail {
+
+  .hero-chrome::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 54px;
+    background: rgba(10, 14, 22, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  .glass-rail,
+  .sticker-overlay {
     display: none;
   }
+  
+  .hm-right,
+  .nav-dots {
+    display: none; /* Hide location line and vertical nav dots on mobile touch */
+  }
+
+  .hm-tl {
+    top: 14px;
+    left: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hm-tl .hm-name {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .hm-tl span:not(.hm-name) {
+    display: none; /* Hide 'SOFTWARE DEVELOPER' subtitle on mobile to prevent header collision */
+  }
+
+  .chrome-actions {
+    top: 10px;
+    right: 14px;
+    gap: 6px;
+  }
+
+  .github-link,
+  .social-circle-link {
+    width: 30px;
+    height: 30px;
+  }
+
+  .lang-toggle {
+    padding: 5px 10px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .hm-bl {
+    display: none; /* Remove bottom-left metadata to clear space for scroll cue */
+  }
+
+  /* 2. Hero Section */
+  .hero {
+    min-height: 100vh;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .about {
+    max-width: 94vw;
+    padding: 0 10px;
+  }
+
+  .about-title {
+    font-size: clamp(38px, 11vw, 56px);
+  }
+
+  .about-body {
+    font-size: clamp(13px, 3.8vw, 15px);
+    line-height: 1.65;
+    margin-top: 16px;
+  }
+
+  .scroll-cue {
+    bottom: 16px;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  /* 3. Résumé, Timeline & Skills */
+  .resume {
+    padding: 10vh 16px 8vh;
+  }
+
+  .resume-title {
+    width: 100%;
+    margin: 0 0 20px 0;
+    font-size: clamp(28px, 7vw, 38px);
+  }
+
+  .timeline {
+    width: 100%;
+    margin: 0;
+  }
+
+  .timeline:before {
+    left: 10px;
+    top: 14px;
+    bottom: 14px;
+  }
+
+  .tl-entry {
+    padding-left: 28px;
+    padding-bottom: 24px;
+    margin-bottom: 14px;
+    background: rgba(13, 17, 25, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 16px 16px 18px 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .tl-entry:last-child {
+    padding-bottom: 18px;
+  }
+
+  .tl-dot {
+    left: 10px;
+    top: 20px;
+    width: 9px;
+    height: 9px;
+  }
+
+  .tl-period {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.4em;
+  }
+
+  .tl-place {
+    font-size: clamp(17px, 4.5vw, 22px);
+  }
+
+  .tl-role {
+    font-size: 13.5px;
+  }
+
+  .tl-points {
+    margin-top: 0.8em;
+    gap: 0.4em;
+  }
+
+  .tl-points li {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* 4. Works Gallery (Vertical on Mobile) */
   .wk-gallery {
     height: auto !important;
   }
+
   .wk-gallery-sticky {
     position: static;
     height: auto;
     overflow: visible;
     display: block;
   }
+
   .wk-track {
     flex-direction: column;
     height: auto;
     padding-left: 0;
+    padding-right: 0;
     transform: none !important;
   }
+
   .wk-card {
     width: 100%;
     height: auto;
     border-left: none;
     border-top: 1px solid var(--line);
-    padding: 40px 20px;
+    padding: 28px 16px;
+    background: rgba(13, 17, 25, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    gap: 20px;
   }
+
   .wk-card:last-child {
     border-right: none;
   }
+
   .wk-progress,
   .wk-hint {
     display: none;
   }
+
   .wk-gallery-title {
     position: static;
-    padding: 24px;
-    font-size: 32px;
+    padding: 24px 16px 16px;
+    font-size: clamp(28px, 7vw, 38px);
   }
-  .timeline {
-    width: 92vw;
-    margin: 4vh auto;
+
+  .wk-card-title {
+    font-size: clamp(22px, 5.5vw, 30px);
   }
-  .resume-title {
-    width: 92vw;
-    margin: 0 auto;
+
+  .wk-card-tagline {
+    font-size: 12px;
+  }
+
+  .wk-line-btn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 12px 0;
+  }
+
+  .wk-line-name {
+    font-size: 16px;
+  }
+
+  .wk-line-meta {
+    max-width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 6px;
+  }
+
+  .wk-line-num {
+    font-size: 11px;
+  }
+
+  .wk-line-tag {
+    font-size: 11px;
+  }
+
+  /* 5. Contact Section */
+  .tl-logos {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tl-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* 6. Project Detail Modal */
+  .wk-detail {
+    inset: 12px;
+    border-radius: 16px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .wk-detail-close {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .wk-detail-banner.is-ph {
+    padding: 28px 16px;
+  }
+
+  .wk-detail-ph-text {
+    font-size: clamp(22px, 6vw, 30px);
+  }
+
+  .wk-detail-article {
+    padding: 20px 14px 32px;
+  }
+
+  .wk-detail-head {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+  }
+
+  .wk-detail-title {
+    font-size: clamp(20px, 5.5vw, 28px);
+  }
+
+  .wk-detail-sub {
+    font-size: 12px;
+  }
+
+  .wk-detail-desc {
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .wk-detail-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .wk-detail-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Extra small mobile adjustments (<= 400px) */
+@media (max-width: 400px) {
+  .chrome-actions {
+    gap: 4px;
+    right: 10px;
+  }
+
+  .github-link,
+  .social-circle-link {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lang-toggle {
+    padding: 4px 8px;
+    font-size: 9.5px;
+  }
+
+  .hm-tl {
+    left: 10px;
+  }
+
+  .hm-tl .hm-name {
+    font-size: 12px;
   }
 }
 

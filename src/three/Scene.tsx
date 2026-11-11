@@ -30,17 +30,31 @@ function CameraRigController({
   const currentOy = useRef(0);
   const parallax = useRef(new THREE.Vector2(0, 0));
 
-  useFrame(({ camera, pointer }, delta) => {
+  useFrame(({ camera, pointer, size }, delta) => {
     const targetPose = sampleCameraTimeline(isReducedMotion ? 0 : progress);
 
     // Frame-rate independent snappy exponential damping (matching Senbuzy's damping physics)
     const lerpFactor = isReducedMotion ? 1 : Math.min(1, 1 - Math.exp(-14 * delta));
 
+    // Dynamic mobile portrait framing: when aspect ratio < 1, adapt FOV and offsets so head fits naturally
+    const isPortrait = size.width < size.height;
+    const portraitFovBoost = isPortrait
+      ? Math.min(18, Math.max(0, (1 - size.width / size.height) * 26))
+      : 0;
+    const targetFov = targetPose.fov + portraitFovBoost;
+
+    const targetOffsetX = isPortrait
+      ? (progress < 0.08 ? 0 : targetPose.modelOffsetX * 0.45)
+      : targetPose.modelOffsetX;
+    const targetOffsetY = isPortrait
+      ? (progress < 0.08 ? targetPose.modelOffsetY + 0.05 : targetPose.modelOffsetY)
+      : targetPose.modelOffsetY;
+
     currentCamPos.current.lerp(targetPose.camPos, lerpFactor);
     currentTarget.current.lerp(targetPose.target, lerpFactor);
     currentRotY.current = THREE.MathUtils.lerp(currentRotY.current, targetPose.modelRotY, lerpFactor);
-    currentOx.current = THREE.MathUtils.lerp(currentOx.current, targetPose.modelOffsetX, lerpFactor);
-    currentOy.current = THREE.MathUtils.lerp(currentOy.current, targetPose.modelOffsetY, lerpFactor);
+    currentOx.current = THREE.MathUtils.lerp(currentOx.current, targetOffsetX, lerpFactor);
+    currentOy.current = THREE.MathUtils.lerp(currentOy.current, targetOffsetY, lerpFactor);
 
     // Subtle 3.5 deg mouse parallax orbit around the target (from Senbuzy)
     const targetParallaxX = isReducedMotion ? 0 : pointer.x * 0.035;
@@ -56,7 +70,7 @@ function CameraRigController({
     camera.lookAt(currentTarget.current);
 
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.fov = THREE.MathUtils.lerp(camera.fov, targetPose.fov, lerpFactor);
+      camera.fov = THREE.MathUtils.lerp(camera.fov, targetFov, lerpFactor);
       camera.updateProjectionMatrix();
     }
 
