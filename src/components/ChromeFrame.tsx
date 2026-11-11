@@ -32,8 +32,7 @@ export const ChromeFrame: React.FC<ChromeFrameProps> = ({
       {/* Top-Left metadata (fades on scroll) */}
       <div
         className="hero-meta hm-tl"
-        onClick={() => onNavigate('hero')}
-        style={{ cursor: 'pointer', opacity: chromeFade, transition: 'opacity 0.2s ease' }}
+        style={{ opacity: chromeFade, transition: 'opacity 0.2s ease', pointerEvents: 'none' }}
       >
         <span className="hm-name">{PERSONAL_INFO.name}</span>
         <span>{PERSONAL_INFO.role}</span>

@@ -96,7 +96,7 @@ body {
 .hm-tl {
   top: calc(var(--m) + 16px);
   left: calc(var(--m) + 20px);
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .hm-tr {
